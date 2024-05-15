@@ -1,0 +1,38 @@
+﻿<Application x:Class="DeliverySystem.App"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:local="clr-namespace:DeliverySystem"
+             StartupUri="Views/Windows/SignInWindow.xaml">
+    <Application.Resources>
+
+        <Style TargetType="TextBox" x:Key="CustomTextBox">
+            <Setter Property="Foreground" Value="#494949"/>
+            <Setter Property="FontFamily" Value="Dubai Medium"/>
+            <Setter Property="FontSize" Value="14"/>
+            <Setter Property="FontWeight" Value="SemiBold"/>
+            <Setter Property="Height" Value="30"/>
+            <Setter Property="BorderBrush" Value="{x:Null}"/>
+            <Setter Property="VerticalContentAlignment" Value="Center"/>
+        </Style>
+
+        <Style TargetType="Separator">
+            <Setter Property="Foreground" Value="#494949"/>
+        </Style>
+
+        <Style TargetType="Label">
+            <Setter Property="Foreground" Value="#494949"/>
+            <Setter Property="FontSize" Value="14"/>
+            <Setter Property="FontFamily" Value="Dubai Medium"/>
+        </Style>
+
+        <Style TargetType="Button">
+            <Setter Property="Foreground" Value="#494949"/>
+            <Setter Property="FontFamily" Value="Dubai Medium"/>
+            <Setter Property="FontSize" Value="14"/>
+            <Setter Property="FontWeight" Value="SemiBold"/>
+            <Setter Property="Height" Value="30"/>
+            <Setter Property="BorderBrush" Value="{x:Null}"/>
+        </Style>
+
+    </Application.Resources>
+</Application>
