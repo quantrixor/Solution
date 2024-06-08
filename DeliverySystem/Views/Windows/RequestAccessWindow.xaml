@@ -1,0 +1,24 @@
+﻿<Window x:Class="DeliverySystem.Views.Windows.RequestAccessWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:DeliverySystem.Views.Windows"
+        mc:Ignorable="d" WindowStartupLocation="CenterScreen"
+        ResizeMode="CanMinimize"
+        Title="Запросить доступ" Height="450" Width="600">
+    <Grid>
+        <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center">
+            <Label Content="Доступ к системе" FontSize="20" HorizontalContentAlignment="Center"/>
+            <Label Content="Ваше имя:"/>
+            <TextBox x:Name="txbFirstName" Style="{StaticResource CustomTextBoxStyle}" Width="300"/>
+            <Label Content="Ваша фамилия:"/>
+            <TextBox x:Name="txbLastName" Style="{StaticResource CustomTextBoxStyle}" Width="300"/>
+            <Label Content="Ваша почта:"/>
+            <TextBox x:Name="txbEmail" Style="{StaticResource CustomTextBoxStyle}" Width="300"/>
+            <Label Content="Ваш номер телефона:"/>
+            <TextBox x:Name="txbPhoneNumber" Style="{StaticResource CustomTextBoxStyle}" Width="300" PreviewTextInput="PhoneNumberTextBox_PreviewTextInput"/>
+            <Button x:Name="RequestAccess" Content="Запросить доступ" Style="{StaticResource AnimatedButtonStyle}" Margin="0,10,0,0" Click="RequestAccess_Click"/>
+        </StackPanel>
+    </Grid>
+</Window>

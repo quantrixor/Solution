@@ -1,4 +1,5 @@
-﻿using DeliverySystem.Views.Windows;
+﻿using DeliverySystem.Views.Pages.AdminPage;
+using DeliverySystem.Views.Windows;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -31,6 +32,18 @@ namespace DeliverySystem
             SignInWindow signInWindow = new SignInWindow();
             signInWindow.Show();
             this.Close();
+        }
+
+        private void Window_Loaded(object sender, RoutedEventArgs e)
+        {
+            txtCurrentUser.Text = $"{App.CurrentUser.FirstName} {App.CurrentUser.LastName}";
+            lblEmail.Content = App.CurrentUser.Email;
+            lblCurrentDate.Content = DateTime.Now.ToString("D");
+        }
+
+        private void CouriersList_Click(object sender, RoutedEventArgs e)
+        {
+            MainFrame.Navigate(new CouriersPage());
         }
     }
 }

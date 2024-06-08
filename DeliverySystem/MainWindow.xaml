@@ -5,7 +5,8 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:DeliverySystem"
         mc:Ignorable="d" WindowState="Maximized"
-        Title="Delivery System App" Height="600" Width="1080">
+        Loaded="Window_Loaded"
+        Title="Delivery System App" Height="650" Width="1080">
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="auto"/>
@@ -19,63 +20,25 @@
             </Grid.RowDefinitions>
 
             <StackPanel Grid.Row="0">
-                <Label Content="Admin" HorizontalAlignment="Center" Margin="10" ContentStringFormat="Пользователь: {0}"/>
+                <Label Content="08 июня 2024 год" x:Name="lblCurrentDate" HorizontalAlignment="Center" Margin="10"/>
+                <StackPanel Margin="5,0,5,0">
+                    <Button Content="Пользователи" Width="200" Margin="0,10,0,0" Style="{StaticResource AnimatedButtonStyle}"/>
+                    <Button Content="Заказы" Width="200" Margin="0,5,0,0" Style="{StaticResource AnimatedButtonStyle}"/>
+                    <Button Click="CouriersList_Click" Content="Курьеры" Width="200" Margin="0,5,0,0" Style="{StaticResource AnimatedButtonStyle}"/>
+                    <Button Content="Клиенты" Width="200" Margin="0,5,0,0" Style="{StaticResource AnimatedButtonStyle}"/>
+                    <Button Content="Доставки" Width="200" Margin="0,5,0,0" Style="{StaticResource AnimatedButtonStyle}"/>
+                    <Button Content="Статистика" Width="200" Margin="0,5,0,0" Style="{StaticResource AnimatedButtonStyle}"/>
+                    <Button Content="Выйти" x:Name="SignOut" Click="SignOut_Click" Width="200" Margin="0,5,0,0" Style="{StaticResource AnimatedButtonStyle}"/>
+                </StackPanel>
             </StackPanel>
-            <StackPanel Grid.Row="1" Margin="5,0,5,0">
-                <Button Content="Пользователи" Width="300" Margin="0,10,0,0">
-                    <Button.Resources>
-                        <Style TargetType="Border">
-                            <Setter Property="CornerRadius" Value="5"/>
-                        </Style>
-                    </Button.Resources>
-                </Button>
-                <Separator/>
-                
-                <Button Content="Заказы" Width="300" Margin="0,5,0,0">
-                    <Button.Resources>
-                        <Style TargetType="Border">
-                            <Setter Property="CornerRadius" Value="5"/>
-                        </Style>
-                    </Button.Resources>
-                </Button>
-                <Separator/>
 
-                <Button Content="Курьеры" Width="300" Margin="0,5,0,0">
-                    <Button.Resources>
-                        <Style TargetType="Border">
-                            <Setter Property="CornerRadius" Value="5"/>
-                        </Style>
-                    </Button.Resources>
-                </Button>
-                <Separator/>
-
-                <Button Content="Клиенты" Width="300" Margin="0,5,0,0">
-                    <Button.Resources>
-                        <Style TargetType="Border">
-                            <Setter Property="CornerRadius" Value="5"/>
-                        </Style>
-                    </Button.Resources>
-                </Button>
-                <Separator/>
-
-                <Button Content="Доставки" Width="300" Margin="0,5,0,0">
-                    <Button.Resources>
-                        <Style TargetType="Border">
-                            <Setter Property="CornerRadius" Value="5"/>
-                        </Style>
-                    </Button.Resources>
-                </Button>
-                <Separator/>
-                <Button Content="Выйти" x:Name="SignOut" Click="SignOut_Click" Width="300" Margin="0,5,0,0">
-                    <Button.Resources>
-                        <Style TargetType="Border">
-                            <Setter Property="CornerRadius" Value="5"/>
-                        </Style>
-                    </Button.Resources>
-                </Button>
-                <Separator/>
+            <StackPanel VerticalAlignment="Bottom" Grid.Row="1" Margin="10">
+                <TextBlock x:Name="txtCurrentUser" Text="Mariya" TextWrapping="Wrap" FontSize="16" FontWeight="Bold"/>
+                <Label x:Name="lblEmail" Content="email@gmail.com" FontSize="14"/>
             </StackPanel>
         </Grid>
-        <Grid Grid.Column="1"></Grid>
+        <Grid Grid.Column="1">
+            <Frame x:Name="MainFrame" NavigationUIVisibility="Hidden"/>
+        </Grid>
     </Grid>
 </Window>

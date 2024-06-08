@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Configuration;
-using System.Data;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using DeliverySystem.Model;
 using System.Windows;
 
 namespace DeliverySystem
@@ -13,5 +8,6 @@ namespace DeliverySystem
     /// </summary>
     public partial class App : Application
     {
+        public static User CurrentUser { get; set; }
     }
 }

@@ -1,16 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using DeliverySystem.Model;
+using DeliverySystem.Utilites;
+using System;
+using System.Data.Entity;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
 
 namespace DeliverySystem.Views.Windows
 {
@@ -19,16 +12,60 @@ namespace DeliverySystem.Views.Windows
     /// </summary>
     public partial class SignInWindow : Window
     {
+        dbContext _context;
         public SignInWindow()
         {
             InitializeComponent();
+            _context = new dbContext();
         }
 
-        private void SignIn_Click(object sender, RoutedEventArgs e)
+        private async void SignIn_Click(object sender, RoutedEventArgs e)
         {
-            MainWindow mainWindow = new MainWindow();
-            mainWindow.Show();
-            this.Close();
+            string email = txbUsername.Text;
+            string password = psbPassword.Password;
+
+            if(string.IsNullOrEmpty(email) || string.IsNullOrEmpty(password))
+            {
+                return;
+            }
+
+            // Деактивировать кнопку входа во время выполнения операции
+            SignIn.IsEnabled = false;
+            try
+            {
+                // Запрос на доступ к системе
+                var user = await _context.Users
+                                         .FirstOrDefaultAsync(u => u.Email == email);
+
+                if (user != null && PasswordHelper.VerifyPassword(user.PasswordHash, password))
+                {
+                    App.CurrentUser = user;
+                    MainWindow mainWindow = new MainWindow();
+                    mainWindow.Show();
+                    this.Close();
+                }
+                else
+                {
+                    MessageBox.Show("Неправильный логин или пароль.", "В доступе отказано", MessageBoxButton.OK, MessageBoxImage.Warning);
+                }
+            }
+            catch (Exception ex)
+            {
+                // Показываем сообщение об ошибке, если произошло исключение
+                MessageBox.Show("Ошибка при попытке входа: " + ex.Message, "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
+            finally
+            {
+                // В любом случае возвращаем кнопке возможность быть нажатой
+                SignIn.IsEnabled = true;
+            }
+        }
+
+
+        private void RequestAccess_Click(object sender, RoutedEventArgs e)
+        {
+            RequestAccessWindow requestAccessWindow = new RequestAccessWindow();
+            requestAccessWindow.ShowDialog();
         }
     }
 }
