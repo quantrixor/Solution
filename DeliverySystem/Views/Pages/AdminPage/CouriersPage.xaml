@@ -4,7 +4,7 @@
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:DeliverySystem.Views.Pages.AdminPage"
-      mc:Ignorable="d" 
+      mc:Ignorable="d" Loaded="Page_Loaded"
       d:DesignHeight="450" d:DesignWidth="800"
       Title="Курьеры">
 
@@ -24,7 +24,7 @@
 
 
         <Grid Grid.Row="1">
-            <ListView x:Name="CouriersListView" Loaded="ListView_Loaded">
+            <ListView x:Name="CouriersListView" Loaded="ListView_Loaded" SelectionChanged="CouriersListView_SelectionChanged">
                 <ListView.Resources>
                     <Style TargetType="TextBlock">
                         <Setter Property="FontSize" Value="16"/>
@@ -41,11 +41,13 @@
                     </GridView>
                 </ListView.View>
             </ListView>
-
         </Grid>
         
         <Grid Grid.Row="2">
-            
+
+            <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0,10,0,10">
+                <Button Style="{StaticResource AnimatedButtonStyle}" Width="300" Content="Добавить"/>
+            </StackPanel>
         </Grid>
         
     </Grid>

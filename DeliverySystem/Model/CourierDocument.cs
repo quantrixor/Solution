@@ -12,6 +12,9 @@ namespace DeliverySystem.Model
         public int DocumentID { get; set; }
 
         public int CourierID { get; set; }
+        public string DocumentType { get; set; }
+        public string FileName { get; set; }
+        public string DisplayName { get; set; }
 
         public byte[] Passport { get; set; }
 

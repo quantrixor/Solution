@@ -17,6 +17,12 @@ namespace DeliverySystem.Views.Windows
         {
             InitializeComponent();
             _context = new dbContext();
+            LoadUserEmail();
+        }
+        public void LoadUserEmail()
+        {
+            // Загрузка сохраненного email и установка его в текстовое поле
+            txbUsername.Text = Properties.Settings.Default.LastUserEmail ?? "";
         }
 
         private async void SignIn_Click(object sender, RoutedEventArgs e)
@@ -24,7 +30,7 @@ namespace DeliverySystem.Views.Windows
             string email = txbUsername.Text;
             string password = psbPassword.Password;
 
-            if(string.IsNullOrEmpty(email) || string.IsNullOrEmpty(password))
+            if (string.IsNullOrEmpty(email) || string.IsNullOrEmpty(password))
             {
                 return;
             }
@@ -40,6 +46,8 @@ namespace DeliverySystem.Views.Windows
                 if (user != null && PasswordHelper.VerifyPassword(user.PasswordHash, password))
                 {
                     App.CurrentUser = user;
+                    Properties.Settings.Default.LastUserEmail = email; // Сохранение email пользователя
+                    Properties.Settings.Default.Save();
                     MainWindow mainWindow = new MainWindow();
                     mainWindow.Show();
                     this.Close();
