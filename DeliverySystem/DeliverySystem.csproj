@@ -128,11 +128,18 @@
     <Compile Include="Model\CourierDocument.cs" />
     <Compile Include="Model\dbContext.cs" />
     <Compile Include="Model\Delivery.cs" />
+    <Compile Include="Model\DeliveryAddress.cs" />
     <Compile Include="Model\DeliveryStatu.cs" />
+    <Compile Include="Model\Invoice.cs" />
     <Compile Include="Model\Model.cs" />
+    <Compile Include="Model\OperationLog.cs" />
     <Compile Include="Model\Order.cs" />
     <Compile Include="Model\OrderedItem.cs" />
+    <Compile Include="Model\Product.cs" />
+    <Compile Include="Model\ProductDocument.cs" />
+    <Compile Include="Model\ProductType.cs" />
     <Compile Include="Model\Region.cs" />
+    <Compile Include="Model\Review.cs" />
     <Compile Include="Model\Role.cs" />
     <Compile Include="Model\User.cs" />
     <Compile Include="Model\Vehicle.cs" />
@@ -151,8 +158,14 @@
     <Compile Include="Views\Pages\AdminPage\CouriersPage.xaml.cs">
       <DependentUpon>CouriersPage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Views\Pages\AdminPage\ManageProductPage.xaml.cs">
+      <DependentUpon>ManageProductPage.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\Pages\AdminPage\OrdersPage.xaml.cs">
       <DependentUpon>OrdersPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Pages\AdminPage\ProductsListPage.xaml.cs">
+      <DependentUpon>ProductsListPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\Pages\AdminPage\UsersPage.xaml.cs">
       <DependentUpon>UsersPage.xaml</DependentUpon>
@@ -200,7 +213,15 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Views\Pages\AdminPage\ManageProductPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Views\Pages\AdminPage\OrdersPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Pages\AdminPage\ProductsListPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

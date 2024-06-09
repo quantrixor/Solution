@@ -18,11 +18,18 @@ namespace DeliverySystem.Model
         public virtual DbSet<CourierDocument> CourierDocuments { get; set; }
         public virtual DbSet<Courier> Couriers { get; set; }
         public virtual DbSet<Delivery> Deliveries { get; set; }
+        public virtual DbSet<DeliveryAddress> DeliveryAddresses { get; set; }
         public virtual DbSet<DeliveryStatu> DeliveryStatus { get; set; }
+        public virtual DbSet<Invoice> Invoices { get; set; }
         public virtual DbSet<Model> Models { get; set; }
+        public virtual DbSet<OperationLog> OperationLogs { get; set; }
         public virtual DbSet<OrderedItem> OrderedItems { get; set; }
         public virtual DbSet<Order> Orders { get; set; }
+        public virtual DbSet<ProductDocument> ProductDocuments { get; set; }
+        public virtual DbSet<Product> Products { get; set; }
+        public virtual DbSet<ProductType> ProductTypes { get; set; }
         public virtual DbSet<Region> Regions { get; set; }
+        public virtual DbSet<Review> Reviews { get; set; }
         public virtual DbSet<Role> Roles { get; set; }
         public virtual DbSet<User> Users { get; set; }
         public virtual DbSet<Vehicle> Vehicles { get; set; }
@@ -69,13 +76,27 @@ namespace DeliverySystem.Model
                 .WillCascadeOnDelete(false);
 
             modelBuilder.Entity<Order>()
+                .HasMany(e => e.DeliveryAddresses)
+                .WithRequired(e => e.Order)
+                .WillCascadeOnDelete(false);
+
+            modelBuilder.Entity<Order>()
                 .HasMany(e => e.OrderedItems)
                 .WithRequired(e => e.Order)
                 .WillCascadeOnDelete(false);
 
+            modelBuilder.Entity<Product>()
+                .Property(e => e.Price)
+                .HasPrecision(10, 2);
+
             modelBuilder.Entity<Region>()
                 .HasMany(e => e.Cities)
                 .WithRequired(e => e.Region)
+                .WillCascadeOnDelete(false);
+
+            modelBuilder.Entity<User>()
+                .HasMany(e => e.DeliveryAddresses)
+                .WithRequired(e => e.User)
                 .WillCascadeOnDelete(false);
 
             modelBuilder.Entity<User>()
@@ -87,6 +108,11 @@ namespace DeliverySystem.Model
                 .HasMany(e => e.Orders1)
                 .WithOptional(e => e.User1)
                 .HasForeignKey(e => e.ManagedBy);
+
+            modelBuilder.Entity<User>()
+                .HasMany(e => e.Reviews)
+                .WithRequired(e => e.User)
+                .WillCascadeOnDelete(false);
 
             modelBuilder.Entity<VehicleType>()
                 .HasMany(e => e.Vehicles)

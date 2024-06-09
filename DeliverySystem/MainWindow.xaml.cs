@@ -1,19 +1,7 @@
 ﻿using DeliverySystem.Views.Pages.AdminPage;
 using DeliverySystem.Views.Windows;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 
 namespace DeliverySystem
 {
@@ -44,6 +32,16 @@ namespace DeliverySystem
         private void CouriersList_Click(object sender, RoutedEventArgs e)
         {
             MainFrame.Navigate(new CouriersPage());
+        }
+
+        private void Product_Click(object sender, RoutedEventArgs e)
+        {
+            MainFrame.Navigate(new ProductsListPage());
+        }
+
+        private void Oreders_Click(object sender, RoutedEventArgs e)
+        {
+            MainFrame.Navigate(new OrdersPage());
         }
     }
 }

@@ -13,7 +13,6 @@ namespace DeliverySystem.Views.Pages.AdminPage
 {
     public partial class VehicleManagePage : Page
     {
-        private readonly char[] allowedLetters = { 'А', 'В', 'Е', 'К', 'М', 'Н', 'О', 'Р', 'С', 'Т', 'У', 'Х' };
 
         private Courier _courier;
         private dbContext _context;

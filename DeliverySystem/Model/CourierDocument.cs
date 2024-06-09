@@ -12,8 +12,6 @@ namespace DeliverySystem.Model
         public int DocumentID { get; set; }
 
         public int CourierID { get; set; }
-        public string DocumentType { get; set; }
-        public string DisplayName { get; set; }
 
         public byte[] Passport { get; set; }
 
@@ -26,6 +24,12 @@ namespace DeliverySystem.Model
         public byte[] ContractCopy { get; set; }
 
         public byte[] BankDetails { get; set; }
+
+        [StringLength(255)]
+        public string DocumentType { get; set; }
+
+        [StringLength(255)]
+        public string DisplayName { get; set; }
 
         public virtual Courier Courier { get; set; }
     }

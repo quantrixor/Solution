@@ -12,7 +12,9 @@ namespace DeliverySystem.Model
         public Order()
         {
             Deliveries = new HashSet<Delivery>();
+            DeliveryAddresses = new HashSet<DeliveryAddress>();
             OrderedItems = new HashSet<OrderedItem>();
+            Reviews = new HashSet<Review>();
         }
 
         public int OrderID { get; set; }
@@ -50,10 +52,16 @@ namespace DeliverySystem.Model
         public virtual ICollection<Delivery> Deliveries { get; set; }
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<DeliveryAddress> DeliveryAddresses { get; set; }
+
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<OrderedItem> OrderedItems { get; set; }
 
         public virtual User User { get; set; }
 
         public virtual User User1 { get; set; }
+
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Review> Reviews { get; set; }
     }
 }
