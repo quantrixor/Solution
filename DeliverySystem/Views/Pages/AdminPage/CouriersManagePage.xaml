@@ -4,7 +4,7 @@
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:DeliverySystem.Views.Pages.AdminPage"
-      mc:Ignorable="d" 
+      mc:Ignorable="d" Loaded="Page_Loaded"
       d:DesignHeight="600" d:DesignWidth="1010"
       Title="CouriersManagePage">
 
@@ -34,6 +34,7 @@
                 <TextBox x:Name="txbVehicleID" IsReadOnly="True" Style="{StaticResource CustomTextBoxStyle}" Width="300"/>
 
                 <Button x:Name="SaveCourier" Content="Редактировать" Style="{StaticResource AnimatedButtonStyle}" Margin="0,5,0,0" Click="SaveCourier_Click"/>
+                <Button x:Name="VehiclesCourier" Content="Транспортное средство" Style="{StaticResource AnimatedButtonStyle}" Margin="0,5,0,0" Click="VehiclesCourier_Click"/>
             </StackPanel>
         </Grid>
 

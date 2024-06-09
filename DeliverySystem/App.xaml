@@ -4,6 +4,7 @@
              xmlns:local="clr-namespace:DeliverySystem" 
              StartupUri="Views/Windows/SignInWindow.xaml">
     <Application.Resources>
+        
         <local:WidthConverter x:Key="WidthConverter"/>
         
         <Style TargetType="TextBlock" x:Key="ListViewItemTextStyle">
@@ -34,11 +35,13 @@
                                 BorderThickness="{TemplateBinding BorderThickness}" 
                                 CornerRadius="10">
                             <ScrollViewer x:Name="PART_ContentHost"/>
+
                         </Border>
                     </ControlTemplate>
                 </Setter.Value>
             </Setter>
         </Style>
+
         <Style x:Key="CustomPasswordBoxStyle" TargetType="PasswordBox">
             <Setter Property="Padding" Value="5"/>
             <Setter Property="FontSize" Value="16"/>

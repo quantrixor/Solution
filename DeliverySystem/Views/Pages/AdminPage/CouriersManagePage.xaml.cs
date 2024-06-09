@@ -41,16 +41,17 @@ namespace DeliverySystem.Views.Pages.AdminPage
                 txbLastName.Text = _courier.LastName;
                 txbLicenseNumber.Text = _courier.LicenseNumber;
                 txbPhoneNumber.Text = _courier.PhoneNumber;
-                txbVehicleID.Text = _courier.VehicleID.ToString();
+                txbVehicleID.Text = _courier.VehicleID != null ? _courier.VehicleID.ToString() : "ТС не добавлено";
             }
         }
+
         private void SetReadOnlyMode(bool isReadOnly)
         {
             txbFirstName.IsReadOnly = isReadOnly;
             txbLastName.IsReadOnly = isReadOnly;
             txbLicenseNumber.IsReadOnly = isReadOnly;
             txbPhoneNumber.IsReadOnly = isReadOnly;
-            txbVehicleID.IsReadOnly = isReadOnly;
+            //txbVehicleID.IsReadOnly = isReadOnly;
         }
         private void SaveCourier_Click(object sender, RoutedEventArgs e)
         {
@@ -67,7 +68,6 @@ namespace DeliverySystem.Views.Pages.AdminPage
                             LastName = txbLastName.Text,
                             LicenseNumber = txbLicenseNumber.Text,
                             PhoneNumber = txbPhoneNumber.Text,
-                            VehicleID = int.Parse(txbVehicleID.Text)
                         };
                         _context.Couriers.Add(_courier);
                     }
@@ -291,5 +291,36 @@ namespace DeliverySystem.Views.Pages.AdminPage
                 courierDocumentsWindow.ShowDialog();
             }
         }
+
+        private void VehiclesCourier_Click(object sender, RoutedEventArgs e)
+        {
+            if(_courier != null)
+            {
+                NavigationService.Navigate(new VehicleManagePage(_courier));
+            }
+        }
+
+        private int? GetVehicleID()
+        {
+            if (_courier == null) return null;
+
+            var vehicle = _context.Vehicles.FirstOrDefault(v => v.VehicleID == _courier.VehicleID);
+            return vehicle?.VehicleID;
+        }
+
+
+        private void Page_Loaded(object sender, RoutedEventArgs e)
+        {
+            int? vehicleID = GetVehicleID();
+            if (vehicleID != null)
+            {
+                txbVehicleID.Text = vehicleID.ToString();
+            }
+            else
+            {
+                txbVehicleID.Text = "ТС не добавлено";
+            }
+        }
+
     }
 }

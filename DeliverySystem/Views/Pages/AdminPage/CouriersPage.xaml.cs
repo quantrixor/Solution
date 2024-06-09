@@ -51,5 +51,15 @@ namespace DeliverySystem.Views.Pages.AdminPage
         {
             LoadDataCouriers();
         }
+
+        private void AddCourier_Click(object sender, RoutedEventArgs e)
+        {
+            NavigationService.Navigate(new CouriersManagePage(new Courier()));
+        }
+
+        private void SearchBox_TextChanged(object sender, TextChangedEventArgs e)
+        {
+
+        }
     }
 }
