@@ -12,6 +12,7 @@
         <StackPanel VerticalAlignment="Top" Margin="0,10">
             <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
                 <Button Content="Загрузить документ" Width="250" Click="UploadDocument_Click" Style="{StaticResource AnimatedButtonStyle}" Margin="10,0,0,0"/>
+                <Button Content="Удалить" Width="250" Click="DeleteDocument_Click" Style="{StaticResource AnimatedButtonStyle}" Margin="10,0,0,0"/>
             </StackPanel>
 
             <StackPanel Orientation="Horizontal" Margin="10,10,0,0">

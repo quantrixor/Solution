@@ -1,4 +1,5 @@
 ﻿using DeliverySystem.Model;
+using DeliverySystem.ViewModel;
 using Microsoft.Win32;
 using System;
 using System.Collections.Generic;
@@ -112,6 +113,7 @@ namespace DeliverySystem.Views.Windows.AdminWindows
                 });
             }
         }
+
         private void UploadDocument_Click(object sender, RoutedEventArgs e)
         {
             string selectedDocumentType = (cbDocumentType.SelectedItem as ComboBoxItem)?.Content.ToString();
@@ -198,12 +200,67 @@ namespace DeliverySystem.Views.Windows.AdminWindows
                     break;
             }
         }
-    }
 
-    public class DocumentViewModel
-    {
-        public string FilePath { get; set; } // Полный путь к файлу
-        public string SelectedDocumentType { get; set; }
-        public string DisplayName { get; set; } // Имя файла для отображения
+        private void DeleteDocument_Click(object sender, RoutedEventArgs e)
+        {
+            var selectedDocumentViewModel = lvDocuments.SelectedItem as DocumentViewModel;
+            if (selectedDocumentViewModel == null)
+            {
+                MessageBox.Show("Please select a document to delete.", "Selection Required", MessageBoxButton.OK, MessageBoxImage.Warning);
+                return;
+            }
+
+            var documentType = selectedDocumentViewModel.SelectedDocumentType;
+
+            var document = _context.CourierDocuments.FirstOrDefault(d => d.CourierID == _courier.CourierID);
+            if (document == null)
+            {
+                MessageBox.Show("Document not found in the database.", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                return;
+            }
+
+            // Очистка поля документа
+            ClearDocumentProperty(document, documentType);
+
+            try
+            {
+                _context.SaveChanges();
+                MessageBox.Show("Document has been deleted successfully.", "Deleted", MessageBoxButton.OK, MessageBoxImage.Information);
+
+                // Обновляем список документов и доступные типы в ComboBox
+                LoadExistingDocuments();
+                UpdateComboBoxItems();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"An error occurred while deleting the document: {ex.Message}", "Database Error", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
+        }
+
+        private void ClearDocumentProperty(CourierDocument document, string documentType)
+        {
+            switch (documentType)
+            {
+                case "Паспорт":
+                    document.Passport = null;
+                    break;
+                case "ИНН":
+                    document.INN = null;
+                    break;
+                case "СНИЛС":
+                    document.SNILS = null;
+                    break;
+                case "Водительское удостоверение":
+                    document.DriverLicense = null;
+                    break;
+                case "Копия контракта":
+                    document.ContractCopy = null;
+                    break;
+                case "Банковские реквизиты":
+                    document.BankDetails = null;
+                    break;
+            }
+        }
+
     }
 }

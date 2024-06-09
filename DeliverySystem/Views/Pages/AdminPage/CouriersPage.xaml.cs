@@ -34,8 +34,7 @@ namespace DeliverySystem.Views.Pages.AdminPage
             var _selectedCouriesr = (Courier)CouriersListView.SelectedItem;
             if(_selectedCouriesr != null)
             {
-                var couriersDocumentsWindow = new CourierDocumentsWindow(_selectedCouriesr);
-                couriersDocumentsWindow.ShowDialog();
+                NavigationService.Navigate(new CouriersManagePage(_selectedCouriesr));
             }
         }
 

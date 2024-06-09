@@ -6,7 +6,20 @@
     <Application.Resources>
         <local:WidthConverter x:Key="WidthConverter"/>
         
-        
+        <Style TargetType="TextBlock" x:Key="ListViewItemTextStyle">
+            <Setter Property="VerticalAlignment" Value="Center"/>
+            <Setter Property="Margin" Value="5"/>
+            <Setter Property="FontWeight" Value="Bold"/>
+        </Style>
+
+        <Style TargetType="ListViewItem">
+            <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
+            <Setter Property="Padding" Value="10"/>
+            <Setter Property="BorderBrush" Value="Black"/>
+            <Setter Property="BorderThickness" Value="1"/>
+            <Setter Property="Margin" Value="5"/>
+        </Style>
+
         <Style x:Key="CustomTextBoxStyle" TargetType="TextBox">
             <Setter Property="Padding" Value="5"/>
             <Setter Property="FontSize" Value="16"/>

@@ -19,22 +19,52 @@
                 <Label Content="Управление курьерами" FontSize="20" HorizontalContentAlignment="Center"/>
 
                 <Label Content="Имя:"/>
-                <TextBox x:Name="txbFirstName" Style="{StaticResource CustomTextBoxStyle}" Width="300"/>
+                <TextBox x:Name="txbFirstName" IsReadOnly="True" Style="{StaticResource CustomTextBoxStyle}" Width="300"/>
 
                 <Label Content="Фамилия:"/>
-                <TextBox x:Name="txbLastName" Style="{StaticResource CustomTextBoxStyle}" Width="300"/>
+                <TextBox x:Name="txbLastName" IsReadOnly="True" Style="{StaticResource CustomTextBoxStyle}" Width="300"/>
 
                 <Label Content="Номер телефона:"/>
-                <TextBox x:Name="txbPhoneNumber" Style="{StaticResource CustomTextBoxStyle}" Width="300" PreviewTextInput="PhoneNumberTextBox_PreviewTextInput"/>
+                <TextBox x:Name="txbPhoneNumber" IsReadOnly="True" Style="{StaticResource CustomTextBoxStyle}" Width="300" PreviewTextInput="PhoneNumberTextBox_PreviewTextInput"/>
 
                 <Label Content="Номер лицензии:"/>
-                <TextBox x:Name="txbLicenseNumber" Style="{StaticResource CustomTextBoxStyle}" Width="300"/>
+                <TextBox x:Name="txbLicenseNumber" IsReadOnly="True" Style="{StaticResource CustomTextBoxStyle}" Width="300" PreviewTextInput="LicenseNumberTextBox_PreviewTextInput"/>
 
                 <Label Content="ID транспортного средства:"/>
-                <TextBox x:Name="txbVehicleID" Style="{StaticResource CustomTextBoxStyle}" Width="300"/>
+                <TextBox x:Name="txbVehicleID" IsReadOnly="True" Style="{StaticResource CustomTextBoxStyle}" Width="300"/>
 
-                <Button x:Name="SaveCourier" Content="Сохранить" Style="{StaticResource AnimatedButtonStyle}" Margin="0,5,0,0" Click="SaveCourier_Click"/>
+                <Button x:Name="SaveCourier" Content="Редактировать" Style="{StaticResource AnimatedButtonStyle}" Margin="0,5,0,0" Click="SaveCourier_Click"/>
             </StackPanel>
         </Grid>
+
+        <Grid Grid.Column="1">
+            <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center" Margin="10">
+                <ListView x:Name="lvDocuments" Height="200">
+                    <ListView.View>
+                        <GridView>
+                            <GridViewColumn Header="Тип документа" Width="150">
+                                <GridViewColumn.CellTemplate>
+                                    <DataTemplate>
+                                        <TextBlock Text="{Binding SelectedDocumentType}" Style="{StaticResource ListViewItemTextStyle}"/>
+                                    </DataTemplate>
+                                </GridViewColumn.CellTemplate>
+                            </GridViewColumn>
+                            <GridViewColumn Header="Статус" Width="120">
+                                <GridViewColumn.CellTemplate>
+                                    <DataTemplate>
+                                        <TextBlock Text="{Binding FilePath}" Style="{StaticResource ListViewItemTextStyle}"/>
+                                    </DataTemplate>
+                                </GridViewColumn.CellTemplate>
+                            </GridViewColumn>
+                        </GridView>
+                    </ListView.View>
+                </ListView>
+                <Button Content="Скачать выбранные документы" Click="DownloadDocuments_Click" Margin="0,10" Style="{StaticResource AnimatedButtonStyle}" />
+                <Button Content="Управлять документами" Click="ManageDocuments_Click" Style="{StaticResource AnimatedButtonStyle}" />
+            </StackPanel>
+        </Grid>
+
+
+
     </Grid>
 </Page>
