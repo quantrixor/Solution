@@ -5,7 +5,7 @@ using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
-using DeliverySystem.Model;
+using ModelDeliverySystemData.Model;
 using Microsoft.Win32;
 
 namespace DeliverySystem.Views.Pages.AdminPage

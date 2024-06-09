@@ -1,4 +1,4 @@
-﻿using DeliverySystem.Model;
+﻿using ModelDeliverySystemData.Model;
 using DeliverySystem.ViewModel;
 using DeliverySystem.Views.Windows.AdminWindows;
 using Microsoft.Win32;

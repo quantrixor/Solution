@@ -1,4 +1,4 @@
-﻿using DeliverySystem.Model;
+﻿using ModelDeliverySystemData.Model;
 using DeliverySystem.Utilites;
 using DeliverySystem.Validators;
 using System;

@@ -3,7 +3,7 @@ using System.Collections.ObjectModel;
 using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
-using DeliverySystem.Model;
+using ModelDeliverySystemData.Model;
 
 namespace DeliverySystem.Views.Pages.AdminPage
 {

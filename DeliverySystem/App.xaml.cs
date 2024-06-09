@@ -1,4 +1,4 @@
-﻿using DeliverySystem.Model;
+﻿using ModelDeliverySystemData.Model;
 using System.Windows;
 
 namespace DeliverySystem
