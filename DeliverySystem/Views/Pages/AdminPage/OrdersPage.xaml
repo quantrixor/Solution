@@ -8,7 +8,9 @@
       d:DesignHeight="450" d:DesignWidth="800"
       Title="OrdersPage">
 
-    <Grid>
-        
-    </Grid>
+    <Border Background="WhiteSmoke" Margin="10" CornerRadius="10">
+        <Grid>
+
+        </Grid>
+    </Border>
 </Page>

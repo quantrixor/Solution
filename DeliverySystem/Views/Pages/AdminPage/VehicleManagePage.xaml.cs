@@ -173,6 +173,7 @@ namespace DeliverySystem.Views.Pages.AdminPage
             }
         }
 
+
         private void ViewInsuranceDocument_Click(object sender, RoutedEventArgs e)
         {
             if (_vehicle?.InsuranceDocument != null)

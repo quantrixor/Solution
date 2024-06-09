@@ -285,16 +285,22 @@ namespace DeliverySystem.Views.Pages.AdminPage
 
         private void ManageDocuments_Click(object sender, RoutedEventArgs e)
         {
-            if(_courier != null)
+            if (_courier != null)
             {
                 CourierDocumentsWindow courierDocumentsWindow = new CourierDocumentsWindow(_courier);
-                courierDocumentsWindow.ShowDialog();
+                bool? result = courierDocumentsWindow.ShowDialog();
+
+                if (result == true || result == false)
+                {
+                    LoadExistingDocuments();
+                }
             }
         }
 
+
         private void VehiclesCourier_Click(object sender, RoutedEventArgs e)
         {
-            if(_courier != null)
+            if (_courier != null)
             {
                 NavigationService.Navigate(new VehicleManagePage(_courier));
             }
@@ -322,5 +328,9 @@ namespace DeliverySystem.Views.Pages.AdminPage
             }
         }
 
+        private void UpdateListDocuments_Click(object sender, RoutedEventArgs e)
+        {
+            LoadExistingDocuments();
+        }
     }
 }

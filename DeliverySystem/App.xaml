@@ -6,9 +6,20 @@
     <Application.Resources>
         
         <local:WidthConverter x:Key="WidthConverter"/>
+
+        <Style TargetType="Page">
+            <Setter Property="FontFamily" Value="Dubai Medium"/>
+            <Setter Property="FontSize" Value="16"/>
+        </Style>
+        
+        <Style TargetType="Window">
+            <Setter Property="FontFamily" Value="Dubai Medium"/>
+            <Setter Property="FontSize" Value="16"/>
+        </Style>
         
         <Style TargetType="TextBlock" x:Key="ListViewItemTextStyle">
             <Setter Property="VerticalAlignment" Value="Center"/>
+            <Setter Property="FontFamily" Value="Dubai Medium"/>
             <Setter Property="Margin" Value="5"/>
             <Setter Property="FontWeight" Value="Bold"/>
         </Style>
@@ -16,6 +27,7 @@
         <Style TargetType="ListViewItem">
             <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
             <Setter Property="Padding" Value="10"/>
+            <Setter Property="FontFamily" Value="Dubai Medium"/>
             <Setter Property="BorderBrush" Value="Black"/>
             <Setter Property="BorderThickness" Value="1"/>
             <Setter Property="Margin" Value="5"/>
@@ -25,6 +37,7 @@
             <Setter Property="Padding" Value="5"/>
             <Setter Property="FontSize" Value="16"/>
             <Setter Property="BorderBrush" Value="Gray"/>
+            <Setter Property="FontFamily" Value="Dubai Medium"/>
             <Setter Property="BorderThickness" Value="1"/>
             <Setter Property="Background" Value="White"/>
             <Setter Property="Template">
@@ -47,6 +60,7 @@
             <Setter Property="FontSize" Value="16"/>
             <Setter Property="BorderBrush" Value="Gray"/>
             <Setter Property="BorderThickness" Value="1"/>
+            <Setter Property="FontFamily" Value="Dubai Medium"/>
             <Setter Property="Background" Value="White"/>
             <Setter Property="Template">
                 <Setter.Value>
@@ -76,6 +90,7 @@
             <Setter Property="Foreground" Value="#494949"/>
             <Setter Property="FontFamily" Value="Dubai Medium"/>
             <Setter Property="FontSize" Value="14"/>
+            <Setter Property="FontFamily" Value="Dubai Medium"/>
             <Setter Property="FontWeight" Value="SemiBold"/>
             <Setter Property="Height" Value="30"/>
         </Style>

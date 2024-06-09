@@ -76,11 +76,12 @@ namespace DeliverySystem.Views.Pages.AdminPage
             // Проверка наличия накладных
             var invoiceExists = _context.Invoices.Any(i => i.ProductID == _product.ProductID);
             lblInvoiceStatus.Visibility = invoiceExists ? Visibility.Visible : Visibility.Collapsed;
+            btnViewInvoice.Visibility = invoiceExists ? Visibility.Visible : Visibility.Collapsed;
 
             // Проверка наличия документов
             var documentExists = _context.ProductDocuments.Any(d => d.ProductID == _product.ProductID);
             lblDocumentStatus.Visibility = documentExists ? Visibility.Visible : Visibility.Collapsed;
-
+            btnViewDocument.Visibility = documentExists ? Visibility.Visible : Visibility.Collapsed;
         }
 
         private void LoadProductTypes()
@@ -134,6 +135,7 @@ namespace DeliverySystem.Views.Pages.AdminPage
             _product.ProductTypeID = (int?)cmbProductType.SelectedValue;
             _product.ProductionDate = dtpProductionDate.Value;
             _product.ExpiryDate = dtpExpiryDate.Value;
+            _product.CreateAt = DateTime.Now;
 
             if (_product.ProductID == 0)
             {
@@ -185,6 +187,7 @@ namespace DeliverySystem.Views.Pages.AdminPage
                 _context.SaveChanges();
                 _invoices.Add(invoice);
                 MessageBox.Show("Накладная успешно загружена.", "Успех", MessageBoxButton.OK, MessageBoxImage.Information);
+                lblInvoiceStatus.Visibility = Visibility.Visible;
             }
         }
 
@@ -221,6 +224,7 @@ namespace DeliverySystem.Views.Pages.AdminPage
                 _context.SaveChanges();
                 _documents.Add(document);
                 MessageBox.Show("Документ успешно загружен.", "Успех", MessageBoxButton.OK, MessageBoxImage.Information);
+                lblDocumentStatus.Visibility = Visibility.Visible;
             }
         }
 
@@ -228,5 +232,76 @@ namespace DeliverySystem.Views.Pages.AdminPage
         {
             NavigationService.GoBack();
         }
+
+        private void ViewInvoice_Click(object sender, RoutedEventArgs e)
+        {
+            var invoice = _context.Invoices.FirstOrDefault(i => i.ProductID == _product.ProductID);
+            if (invoice != null)
+            {
+                var tempFilePath = Path.GetTempFileName() + ".pdf";
+                File.WriteAllBytes(tempFilePath, invoice.InvoiceDocument);
+                System.Diagnostics.Process.Start(new System.Diagnostics.ProcessStartInfo(tempFilePath) { UseShellExecute = true });
+            }
+        }
+
+        private void ViewDocument_Click(object sender, RoutedEventArgs e)
+        {
+            var document = _context.ProductDocuments.FirstOrDefault(d => d.ProductID == _product.ProductID);
+            if (document != null)
+            {
+                var tempFilePath = Path.GetTempFileName() + ".pdf";
+                File.WriteAllBytes(tempFilePath, document.DocumentContent);
+                System.Diagnostics.Process.Start(new System.Diagnostics.ProcessStartInfo(tempFilePath) { UseShellExecute = true });
+            }
+        }
+
+        private void TxbPrice_PreviewTextInput(object sender, TextCompositionEventArgs e)
+        {
+            // Разрешить ввод только цифр и одной запятой
+            if (!char.IsDigit(e.Text, e.Text.Length - 1) && e.Text != ".")
+            {
+                e.Handled = true;
+            }
+        }
+
+        private void TxbPrice_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            // Получить текущий текст
+            string text = txbPrice.Text;
+
+            // Если текст пустой или состоит только из одной запятой, выход
+            if (string.IsNullOrEmpty(text) || text == ".")
+            {
+                return;
+            }
+
+            // Проверить, правильно ли форматирован текст
+            if (!decimal.TryParse(text, out decimal result))
+            {
+                // Если нет, удалить последнюю введенную часть текста
+                txbPrice.Text = text.Substring(0, text.Length - 1);
+                txbPrice.CaretIndex = txbPrice.Text.Length;
+                return;
+            }
+
+            // Проверить, если текст имеет более двух десятичных знаков
+            int dotIndex = text.IndexOf('.');
+            if (dotIndex >= 0 && text.Length - dotIndex - 1 > 2)
+            {
+                // Если да, удалить лишние знаки
+                txbPrice.Text = text.Substring(0, dotIndex + 3);
+                txbPrice.CaretIndex = txbPrice.Text.Length;
+            }
+        }
+
+        private void TxbPrice_LostFocus(object sender, RoutedEventArgs e)
+        {
+            if (decimal.TryParse(txbPrice.Text, out decimal result))
+            {
+                txbPrice.Text = result.ToString("0.00");
+            }
+        }
+
+
     }
 }

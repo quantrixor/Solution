@@ -6,53 +6,62 @@
       xmlns:local="clr-namespace:DeliverySystem.Views.Pages.AdminPage"
       xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit"
       mc:Ignorable="d" FontSize="16"
-      d:DesignHeight="650" d:DesignWidth="1010"
+      d:DesignHeight="700" d:DesignWidth="1010"
       Title="ManageProductPage">
 
-    <Grid>
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="*"/>
-            <ColumnDefinition Width="*"/>
-        </Grid.ColumnDefinitions>
-        <Grid.RowDefinitions>
-            <RowDefinition Height="*"/>
-            <RowDefinition Height="Auto"/>
-        </Grid.RowDefinitions>
+    <Border CornerRadius="10" Background="WhiteSmoke" Margin="10">
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
 
-        <ScrollViewer VerticalScrollBarVisibility="Auto" Grid.Row="0" Grid.Column="0">
-            <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center">
-                <Label Content="Название:"/>
-                <TextBox x:Name="txbProductName" Width="300" Margin="5" Style="{StaticResource CustomTextBoxStyle}"/>
-                <Label Content="Описание:"/>
-                <TextBox x:Name="txbDescription" Width="300" Margin="5" AcceptsReturn="True" TextWrapping="Wrap" Height="100" Style="{StaticResource CustomTextBoxStyle}"/>
-                <Label Content="Цена:"/>
-                <xctk:MaskedTextBox x:Name="txbPrice" Width="300" Margin="5" Style="{StaticResource CustomTextBoxStyle}" Mask="00000.00" PromptChar=" "/>
-                <Label Content="Количество на складе:"/>
-                <TextBox x:Name="txbStockQuantity" Width="300" Margin="5" Style="{StaticResource CustomTextBoxStyle}" PreviewTextInput="NumberValidationTextBox"/>
-                <Label Content="Тип продукта:"/>
-                <ComboBox x:Name="cmbProductType" Width="300" Margin="5" DisplayMemberPath="ProductTypeName" SelectedValuePath="ProductTypeID"/>
-                <Label Content="Дата производства:"/>
-                <xctk:DateTimePicker x:Name="dtpProductionDate" Width="300" Margin="5" Format="ShortDate"/>
-                <Label Content="Срок годности:"/>
-                <xctk:DateTimePicker x:Name="dtpExpiryDate" Width="300" Margin="5" Format="ShortDate"/>
+            <ScrollViewer VerticalScrollBarVisibility="Auto" Grid.Row="0" Grid.Column="0">
+                <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center">
+                    <Label Content="Название:"/>
+                    <TextBox x:Name="txbProductName" Width="300" Margin="5" Style="{StaticResource CustomTextBoxStyle}"/>
+                    <Label Content="Описание:"/>
+                    <TextBox x:Name="txbDescription" Width="300" Margin="5" AcceptsReturn="True" TextWrapping="Wrap" Height="100" Style="{StaticResource CustomTextBoxStyle}"/>
+                    <Label Content="Цена:"/>
+                    <TextBox x:Name="txbPrice" Width="300" Margin="5" Style="{StaticResource CustomTextBoxStyle}" PreviewTextInput="TxbPrice_PreviewTextInput" TextChanged="TxbPrice_TextChanged" LostFocus="TxbPrice_LostFocus"/>
+                    <Label Content="Количество на складе:"/>
+                    <TextBox x:Name="txbStockQuantity" Width="300" Margin="5" Style="{StaticResource CustomTextBoxStyle}" PreviewTextInput="NumberValidationTextBox"/>
+                    <Label Content="Тип продукта:"/>
+                    <ComboBox x:Name="cmbProductType" Width="300" Margin="5" DisplayMemberPath="ProductTypeName" SelectedValuePath="ProductTypeID"/>
+                    <Label Content="Дата производства:"/>
+                    <xctk:DateTimePicker x:Name="dtpProductionDate" Width="300" Margin="5" Format="ShortDate"/>
+                    <Label Content="Срок годности:"/>
+                    <xctk:DateTimePicker x:Name="dtpExpiryDate" Width="300" Margin="5" Format="ShortDate"/>
+                </StackPanel>
+            </ScrollViewer>
+
+            <ScrollViewer VerticalScrollBarVisibility="Auto" Grid.Row="0" Grid.Column="1">
+                <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center">
+                    <Label Content="Накладные:"/>
+                    
+                    <Label x:Name="lblInvoiceStatus" Foreground="Green" FontSize="18" Content="Загружено" Visibility="Collapsed" Width="300" Margin="5" HorizontalAlignment="Center"/>
+                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                        <Button Content="Загрузить накладную" Width="200" Margin="5" Click="UploadInvoice_Click" Style="{StaticResource AnimatedButtonStyle}"/>
+                        <Button x:Name="btnViewInvoice" Content="Просмотреть накладную" Width="200" Margin="5" Click="ViewInvoice_Click" Style="{StaticResource AnimatedButtonStyle}" Visibility="Collapsed"/>
+                    </StackPanel>
+                    
+                    <Label Content="Документы:"/>
+                    
+                    <Label x:Name="lblDocumentStatus" Foreground="Green" FontSize="18" Content="Загружено" Visibility="Collapsed" Width="300" Margin="5" HorizontalAlignment="Center"/>
+                    <StackPanel HorizontalAlignment="Center" Orientation="Horizontal">
+                        <Button Content="Загрузить документ" Width="200" Margin="5" Click="UploadDocument_Click" Style="{StaticResource AnimatedButtonStyle}"/>
+                        <Button x:Name="btnViewDocument" Content="Просмотреть документ" Width="200" Margin="5" Click="ViewDocument_Click" Style="{StaticResource AnimatedButtonStyle}" Visibility="Collapsed"/>
+                    </StackPanel>
+                </StackPanel>
+            </ScrollViewer>
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Row="1" Grid.ColumnSpan="2" Margin="10">
+                <Button Content="Сохранить" Width="150" Margin="5" Click="SaveProduct_Click" Style="{StaticResource AnimatedButtonStyle}"/>
+                <Button Content="Отмена" Width="150" Margin="5" Click="Cancel_Click" Style="{StaticResource AnimatedButtonStyle}"/>
             </StackPanel>
-        </ScrollViewer>
-
-        <ScrollViewer VerticalScrollBarVisibility="Auto" Grid.Row="0" Grid.Column="1">
-            <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center">
-                <Label Content="Накладные:"/>
-                <Button Content="Загрузить накладную" Width="300" Margin="5" Click="UploadInvoice_Click" Style="{StaticResource AnimatedButtonStyle}"/>
-                <Label x:Name="lblInvoiceStatus" Foreground="Green" FontSize="18" Content="Загружено" Visibility="Collapsed" Width="300" Margin="5" HorizontalAlignment="Center"/>
-                
-                <Label Content="Документы:"/>
-                <Button Content="Загрузить документ" Width="300" Margin="5" Click="UploadDocument_Click" Style="{StaticResource AnimatedButtonStyle}"/>
-                <Label x:Name="lblDocumentStatus" Foreground="Green" FontSize="18" Content="Загружено" Visibility="Collapsed" Width="300" Margin="5" HorizontalAlignment="Center"/>
-
-            </StackPanel>
-        </ScrollViewer>
-        <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Row="1" Grid.ColumnSpan="2" Margin="10">
-            <Button Content="Сохранить" Width="150" Margin="5" Click="SaveProduct_Click" Style="{StaticResource AnimatedButtonStyle}"/>
-            <Button Content="Отмена" Width="150" Margin="5" Click="Cancel_Click" Style="{StaticResource AnimatedButtonStyle}"/>
-        </StackPanel>
-    </Grid>
+        </Grid>
+    </Border>
 </Page>

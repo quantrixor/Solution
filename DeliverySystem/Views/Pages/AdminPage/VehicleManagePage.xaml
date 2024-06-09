@@ -9,35 +9,37 @@
       d:DesignHeight="600" d:DesignWidth="1080"
       Title="VehicleManagePage">
 
-    <Grid>
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="*"/>
-            <ColumnDefinition Width="*"/>
-        </Grid.ColumnDefinitions>
-        <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center" Grid.Column="0" >
-            <Label Content="Гос. номер авто:"/>
-            <xctk:MaskedTextBox x:Name="txbLicensePlate" Width="300" Margin="5" 
-                                Mask="L 000 LL 000" 
-                                PromptChar=" "
-                                Style="{StaticResource CustomTextBoxStyle}"/>
+    <Border Background="WhiteSmoke" Margin="10" CornerRadius="10">
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+            <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center" Grid.Column="0" >
+                <Label Content="Гос. номер авто:"/>
+                <xctk:MaskedTextBox x:Name="txbLicensePlate" Width="300" Margin="5" 
+                             Mask="L 000 LL 000" 
+                             PromptChar=" "
+                             Style="{StaticResource CustomTextBoxStyle}"/>
 
-            <Label Content="Марка:"/>
-            <ComboBox x:Name="cmbBrand" Width="300" Margin="5" Height="30" SelectionChanged="cmbBrand_SelectionChanged"/>
-            <Label Content="Модель:"/>
-            <ComboBox x:Name="cmbModel" Width="300" Margin="5" Height="30"/>
-            <Label Content="Тип авто:"/>
-            <ComboBox x:Name="cmbType" Width="300" Margin="5" Height="30"/>
-            <Button x:Name="btnSaveVehicle" Content="Сохранить" Width="300" Margin="5" Click="SaveVehicle_Click" Style="{StaticResource AnimatedButtonStyle}"/>
-            <Button Content="Загрузить страховой документ" Width="300" Margin="5" Click="UploadInsuranceDocument_Click" Style="{StaticResource AnimatedButtonStyle}"/>
-            <Button Content="Загрузить технический паспорт" Width="300" Margin="5" Click="UploadTechnicalPassport_Click" Style="{StaticResource AnimatedButtonStyle}"/>
-            <Button Content="Назад" Width="300" Margin="5" Click="BackButton_Click" Style="{StaticResource AnimatedButtonStyle}"/>
-        </StackPanel>
-        
-        <StackPanel Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Center">
-            <Label Content="Страховой документ:"/>
-            <Button x:Name="btnViewInsuranceDocument" Content="Просмотреть" Width="300" Margin="5" Click="ViewInsuranceDocument_Click" Style="{StaticResource AnimatedButtonStyle}"/>
-            <Label Content="Технический паспорт:"/>
-            <Button x:Name="btnViewTechnicalPassport" Content="Просмотреть" Width="300" Margin="5" Click="ViewTechnicalPassport_Click" Style="{StaticResource AnimatedButtonStyle}"/>
-        </StackPanel>
-    </Grid>
+                <Label Content="Марка:"/>
+                <ComboBox x:Name="cmbBrand" Width="300" Margin="5" Height="30" SelectionChanged="cmbBrand_SelectionChanged"/>
+                <Label Content="Модель:"/>
+                <ComboBox x:Name="cmbModel" Width="300" Margin="5" Height="30"/>
+                <Label Content="Тип авто:"/>
+                <ComboBox x:Name="cmbType" Width="300" Margin="5" Height="30"/>
+                <Button x:Name="btnSaveVehicle" Content="Сохранить" Width="300" Margin="5" Click="SaveVehicle_Click" Style="{StaticResource AnimatedButtonStyle}"/>
+                <Button Content="Загрузить страховой документ" Width="300" Margin="5" Click="UploadInsuranceDocument_Click" Style="{StaticResource AnimatedButtonStyle}"/>
+                <Button Content="Загрузить технический паспорт" Width="300" Margin="5" Click="UploadTechnicalPassport_Click" Style="{StaticResource AnimatedButtonStyle}"/>
+                <Button Content="Назад" Width="300" Margin="5" Click="BackButton_Click" Style="{StaticResource AnimatedButtonStyle}"/>
+            </StackPanel>
+
+            <StackPanel Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Center">
+                <Label Content="Страховой документ:"/>
+                <Button x:Name="btnViewInsuranceDocument" Content="Просмотреть" Width="300" Margin="5" Click="ViewInsuranceDocument_Click" Style="{StaticResource AnimatedButtonStyle}"/>
+                <Label Content="Технический паспорт:"/>
+                <Button x:Name="btnViewTechnicalPassport" Content="Просмотреть" Width="300" Margin="5" Click="ViewTechnicalPassport_Click" Style="{StaticResource AnimatedButtonStyle}"/>
+            </StackPanel>
+        </Grid>
+    </Border>
 </Page>

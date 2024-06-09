@@ -6,53 +6,64 @@
       xmlns:local="clr-namespace:DeliverySystem.Views.Pages.AdminPage" 
       xmlns:conv="clr-namespace:DeliverySystem"
       mc:Ignorable="d" Loaded="Page_Loaded"
-      d:DesignHeight="450" d:DesignWidth="800"
+      FontSize="16"
+      d:DesignHeight="650" d:DesignWidth="1010"
       Title="ProductsListPage">
     <Page.Resources>
         <conv:WidthConverter x:Key="WidthConverter" />
     </Page.Resources>
-    <Grid>
-        <Grid.RowDefinitions>
-            <RowDefinition Height="Auto"/>
-            <RowDefinition Height="*"/>
-            <RowDefinition Height="Auto"/>
-        </Grid.RowDefinitions>
 
-        <Grid Grid.Row="0" Margin="10">
-            <StackPanel HorizontalAlignment="Left" VerticalAlignment="Center" Orientation="Horizontal">
-                <Label Content="Поиск:"/>
-                <TextBox x:Name="SearchBox" Style="{StaticResource CustomTextBoxStyle}" Width="300" TextChanged="SearchBox_TextChanged"/>
-            </StackPanel>
-        </Grid>
+    <Border CornerRadius="10" Background="WhiteSmoke" Margin="10">
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
 
-        <Grid Grid.Row="1" Margin="10">
-            <ListView x:Name="ProductsListView" SelectionChanged="ProductsListView_SelectionChanged">
-                <ListView.Resources>
-                    <Style TargetType="TextBlock">
-                        <Setter Property="FontSize" Value="16"/>
-                        <Setter Property="FontWeight" Value="Bold"/>
-                        <Setter Property="VerticalAlignment" Value="Center"/>
-                    </Style>
-                </ListView.Resources>
-                <ListView.View>
-                    <GridView>
-                        <GridViewColumn Header="Название" DisplayMemberBinding="{Binding ProductName}" 
-                                        Width="{Binding ActualWidth, RelativeSource={RelativeSource AncestorType=ListView}, Converter={StaticResource WidthConverter}, ConverterParameter=4}"/>
-                        <GridViewColumn Header="Описание" DisplayMemberBinding="{Binding Description}" 
-                                        Width="{Binding ActualWidth, RelativeSource={RelativeSource AncestorType=ListView}, Converter={StaticResource WidthConverter}, ConverterParameter=4}"/>
-                        <GridViewColumn Header="Цена" DisplayMemberBinding="{Binding Price}" 
-                                        Width="{Binding ActualWidth, RelativeSource={RelativeSource AncestorType=ListView}, Converter={StaticResource WidthConverter}, ConverterParameter=4}"/>
-                        <GridViewColumn Header="Количество на складе" DisplayMemberBinding="{Binding StockQuantity}" 
-                                        Width="{Binding ActualWidth, RelativeSource={RelativeSource AncestorType=ListView}, Converter={StaticResource WidthConverter}, ConverterParameter=4}"/>
-                    </GridView>
-                </ListView.View>
-            </ListView>
-        </Grid>
+            <Grid Grid.Row="0" Margin="10">
+                <StackPanel HorizontalAlignment="Left" VerticalAlignment="Center" Orientation="Horizontal">
+                    <Label Content="Поиск:"/>
+                    <TextBox x:Name="SearchBox" Style="{StaticResource CustomTextBoxStyle}" Width="300" TextChanged="SearchBox_TextChanged"/>
+                    <Label Content="Дата с:" Margin="10,0,0,0"/>
+                    <DatePicker x:Name="StartDatePicker" SelectedDateChanged="DatePicker_SelectedDateChanged" Width="150"/>
+                    <Label Content="по:" Margin="10,0,0,0"/>
+                    <DatePicker x:Name="EndDatePicker" SelectedDateChanged="DatePicker_SelectedDateChanged" Width="150"/>
+                    <Button Content="Сбросить фильтр" Style="{StaticResource AnimatedButtonStyle}" Margin="10,0,0,0" Width="200" Click="ClearFilter_Click"/>
+                </StackPanel>
+            </Grid>
 
-        <Grid Grid.Row="2">
-            <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0,10,0,10">
-                <Button Style="{StaticResource AnimatedButtonStyle}" Width="300" Content="Добавить продукт" Click="AddProduct_Click"/>
-            </StackPanel>
+            <Grid Grid.Row="1" Margin="10">
+                <ListView x:Name="ProductsListView">
+                    <ListView.Resources>
+                        <Style TargetType="TextBlock">
+                            <Setter Property="FontSize" Value="16"/>
+                            <Setter Property="FontWeight" Value="Bold"/>
+                            <Setter Property="VerticalAlignment" Value="Center"/>
+                        </Style>
+                    </ListView.Resources>
+                    <ListView.View>
+                        <GridView>
+                            <GridViewColumn Header="Название" DisplayMemberBinding="{Binding ProductName}" 
+                                     Width="{Binding ActualWidth, RelativeSource={RelativeSource AncestorType=ListView}, Converter={StaticResource WidthConverter}, ConverterParameter=4}"/>
+                            <GridViewColumn Header="Описание" DisplayMemberBinding="{Binding Description}" 
+                                     Width="{Binding ActualWidth, RelativeSource={RelativeSource AncestorType=ListView}, Converter={StaticResource WidthConverter}, ConverterParameter=4}"/>
+                            <GridViewColumn Header="Цена" DisplayMemberBinding="{Binding Price}" 
+                                     Width="{Binding ActualWidth, RelativeSource={RelativeSource AncestorType=ListView}, Converter={StaticResource WidthConverter}, ConverterParameter=4}"/>
+                            <GridViewColumn Header="Количество на складе" DisplayMemberBinding="{Binding StockQuantity}" 
+                                     Width="{Binding ActualWidth, RelativeSource={RelativeSource AncestorType=ListView}, Converter={StaticResource WidthConverter}, ConverterParameter=4}"/>
+                        </GridView>
+                    </ListView.View>
+                </ListView>
+            </Grid>
+
+            <Grid Grid.Row="2">
+                <StackPanel HorizontalAlignment="Center" Orientation="Horizontal" VerticalAlignment="Center" Margin="0,10,0,10">
+                    <Button Style="{StaticResource AnimatedButtonStyle}" Width="300" Content="Добавить продукт" Click="AddProduct_Click"/>
+                    <Button Style="{StaticResource AnimatedButtonStyle}" Width="300" Margin="5,0,5,0" Content="Редактировать продукт" Click="EditProduct_Click"/>
+                    <Button Style="{StaticResource AnimatedButtonStyle}" Width="300" Content="Удалить продукт" Click="DeleteProduct_Click"/>
+                </StackPanel>
+            </Grid>
         </Grid>
-    </Grid>
+    </Border>
 </Page>
