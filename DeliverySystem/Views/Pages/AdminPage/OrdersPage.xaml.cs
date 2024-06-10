@@ -112,11 +112,6 @@ namespace DeliverySystem.Views.Pages.AdminPage
 
         private void ApplyFilters()
         {
-            if (_context == null)
-            {
-                MessageBox.Show("Database context is not initialized.");
-                return;
-            }
 
             var filteredOrders = _context.Orders.AsQueryable();
 

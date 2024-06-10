@@ -1,7 +1,9 @@
-﻿using DeliverySystem.Views.Pages.AdminPage;
+﻿using DeliverySystem.Views.Pages;
+using DeliverySystem.Views.Pages.AdminPage;
 using DeliverySystem.Views.Windows;
 using System;
 using System.Windows;
+using System.Windows.Navigation;
 
 namespace DeliverySystem
 {
@@ -13,6 +15,7 @@ namespace DeliverySystem
         public MainWindow()
         {
             InitializeComponent();
+            MainFrame.Navigate(new ProductsListPage());
         }
 
         private void SignOut_Click(object sender, RoutedEventArgs e)
@@ -42,6 +45,14 @@ namespace DeliverySystem
         private void Oreders_Click(object sender, RoutedEventArgs e)
         {
             MainFrame.Navigate(new OrdersPage());
+        }
+
+        private void EditDataCurrentUser_Click(object sender, RoutedEventArgs e)
+        {
+            if(App.CurrentUser != null)
+            {
+                MainFrame.Navigate(new UserProfilePage());  
+            }
         }
     }
 }

@@ -272,6 +272,9 @@
     <Compile Include="Views\Pages\AdminPage\VehicleManagePage.xaml.cs">
       <DependentUpon>VehicleManagePage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Views\Pages\UserProfilePage.xaml.cs">
+      <DependentUpon>UserProfilePage.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\Windows\AdminWindows\CourierDocumentsWindow.xaml.cs">
       <DependentUpon>CourierDocumentsWindow.xaml</DependentUpon>
     </Compile>
@@ -333,6 +336,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\Pages\UserPages\UserProfilePage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Pages\UserProfilePage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

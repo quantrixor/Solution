@@ -35,6 +35,7 @@
             <StackPanel VerticalAlignment="Bottom" Grid.Row="1" Margin="10">
                 <TextBlock x:Name="txtCurrentUser" Text="Mariya" TextWrapping="Wrap" FontSize="16" FontWeight="Bold"/>
                 <Label x:Name="lblEmail" Content="email@gmail.com" FontSize="14"/>
+                <Button Content="Редактировать" Click="EditDataCurrentUser_Click" Background="{x:Null}" Style="{StaticResource AnimatedButtonStyle}"/>
             </StackPanel>
         </Grid>
         <Grid Grid.Column="1">
