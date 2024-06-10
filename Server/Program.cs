@@ -14,10 +14,7 @@ builder.Services.AddDbContext<DeliverySystemDbContext>(options =>
 // Add SignalR
 builder.Services.AddSignalR();
 
-// Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
-builder.Services.AddEndpointsApiExplorer();
-builder.Services.AddSwaggerGen();
-
+// Configure CORS
 builder.Services.AddCors(options =>
 {
     options.AddPolicy("AllowSpecificOrigin",
@@ -27,6 +24,9 @@ builder.Services.AddCors(options =>
                           .AllowCredentials());
 });
 
+// Configure Swagger/OpenAPI
+builder.Services.AddEndpointsApiExplorer();
+builder.Services.AddSwaggerGen();
 
 var app = builder.Build();
 
@@ -35,7 +35,7 @@ if (app.Environment.IsDevelopment())
 {
     app.UseDeveloperExceptionPage();
     app.UseSwagger();
-    app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "My API V1"));
+    app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "API Server"));
 }
 else
 {
@@ -53,10 +53,8 @@ app.UseCors("AllowSpecificOrigin");
 app.UseAuthentication();
 app.UseAuthorization();
 
-app.UseEndpoints(endpoints =>
-{
-    endpoints.MapControllers();
-    endpoints.MapHub<OrderHub>("/orderHub"); // Добавьте маппинг хаба
-});
+// Register routes at the top level
+app.MapControllers();
+app.MapHub<OrderHub>("/orderHub");
 
 app.Run();

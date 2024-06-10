@@ -10,7 +10,6 @@ namespace DeliverySystem.Views.Pages.AdminPage
     public partial class ProductsListPage : Page
     {
         private dbContext _context;
-        private Product _selectedProduct;
 
         public ProductsListPage()
         {

@@ -34,7 +34,7 @@
             </Grid>
 
             <Grid Grid.Row="1" Margin="10">
-                <ListView x:Name="ProductsListView">
+                <ListView x:Name="ProductsListView" d:ItemsSource="{d:SampleData ItemCount=5}">
                     <ListView.Resources>
                         <Style TargetType="TextBlock">
                             <Setter Property="FontSize" Value="16"/>
