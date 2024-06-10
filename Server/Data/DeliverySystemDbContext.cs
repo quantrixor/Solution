@@ -1,16 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Server.Models;
 
 namespace Server.Data;
 
-public partial class DeliverySystemDbContext : DbContext
+public partial class DeliverySystemDbContext : IdentityDbContext<IdentityUser>
 {
-    public DeliverySystemDbContext()
-    {
-    }
-
     public DeliverySystemDbContext(DbContextOptions<DeliverySystemDbContext> options)
         : base(options)
     {
@@ -62,6 +60,7 @@ public partial class DeliverySystemDbContext : DbContext
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
+        base.OnModelCreating(modelBuilder);
         modelBuilder.Entity<Brand>(entity =>
         {
             entity.HasKey(e => e.BrandId).HasName("PK__Brands__DAD4F3BE377CC33A");
