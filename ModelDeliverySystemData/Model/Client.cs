@@ -44,9 +44,9 @@ namespace ModelDeliverySystemData.Model
         [StringLength(255)]
         public string StreetAddress { get; set; }
 
-        public virtual City City { get; set; }
+        public virtual City Cities { get; set; }
 
-        public virtual Region Region { get; set; }
+        public virtual Region Regions { get; set; }
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Order> Orders { get; set; }

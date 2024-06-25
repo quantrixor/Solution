@@ -54,5 +54,10 @@ namespace DeliverySystem
                 MainFrame.Navigate(new UserProfilePage());  
             }
         }
+
+        private void ClientsList_Click(object sender, RoutedEventArgs e)
+        {
+            MainFrame.Navigate(new ClientsPage());
+        }
     }
 }

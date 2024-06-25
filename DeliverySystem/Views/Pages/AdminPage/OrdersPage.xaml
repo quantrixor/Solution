@@ -4,7 +4,7 @@
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
       mc:Ignorable="d"
-      d:DesignHeight="650" d:DesignWidth="1010"
+      d:DesignHeight="650" d:DesignWidth="1110"
       Title="OrdersPage">
 
     <Border Background="WhiteSmoke" Margin="10" CornerRadius="10">
@@ -26,6 +26,7 @@
                     <ComboBoxItem Content="Доставляется"/>
                     <ComboBoxItem Content="Завершен"/>
                 </ComboBox>
+                <Button Click="ClearFilter_Click" Content="Сбросить" Margin="10,0,0,0" Width="100" Style="{StaticResource AnimatedButtonStyle}"/>
             </StackPanel>
 
 

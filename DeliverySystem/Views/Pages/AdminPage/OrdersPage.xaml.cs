@@ -22,11 +22,13 @@ namespace DeliverySystem.Views.Pages.AdminPage
         public OrdersPage()
         {
             InitializeComponent();
+            _context = new dbContext();
             InitializeDatabaseContext();
             _orders = new ObservableCollection<OrderViewModel>();
             LoadOrders();
             InitializeSignalR();
         }
+
         private async void InitializeSignalR()
         {
             _hubConnection = new HubConnectionBuilder()
@@ -81,10 +83,9 @@ namespace DeliverySystem.Views.Pages.AdminPage
             }
             catch (Exception ex)
             {
-                MessageBox.Show($"Failed to initialize database context: {ex.Message}");
+                Console.WriteLine($"Failed to initialize database context: {ex.Message}");
             }
         }
-
 
         private void LoadOrders()
         {
@@ -112,6 +113,11 @@ namespace DeliverySystem.Views.Pages.AdminPage
 
         private void ApplyFilters()
         {
+            if (_context == null)
+            {
+                MessageBox.Show("Database context is not initialized.");
+                return;
+            }
 
             var filteredOrders = _context.Orders.AsQueryable();
 
@@ -191,6 +197,13 @@ namespace DeliverySystem.Views.Pages.AdminPage
         private void SearchBox_TextChanged(object sender, TextChangedEventArgs e)
         {
             ApplyFilters();
+        }
+
+        private void ClearFilter_Click(object sender, RoutedEventArgs e)
+        {
+            OrderDatePicker.SelectedDate = null;
+            StatusComboBox.SelectedIndex = 0;
+            SearchBox.Text = string.Empty;
         }
     }
 
