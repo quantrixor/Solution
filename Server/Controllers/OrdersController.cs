@@ -46,7 +46,7 @@ namespace Server.Controllers
             await _context.SaveChangesAsync();
 
             // Отправка уведомления через SignalR
-            await _hubContext.Clients.All.SendAsync("ReceiveOrderNotification", $"Новый заказ создан: {order.OrderId}");
+            await _hubContext.Clients.All.SendAsync("ReceiveOrderNotification", $"Поступил новый заказ: {order.OrderId} {order.OrderDate}");
 
             return CreatedAtAction(nameof(GetOrder), new { id = order.OrderId }, order);
         }

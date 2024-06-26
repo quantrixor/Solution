@@ -181,9 +181,20 @@ namespace DeliverySystem.Views.Pages.AdminPage
             var selectedOrder = (OrderViewModel)OrdersListView.SelectedItem;
             if (selectedOrder != null)
             {
-                // Логика назначения курьера на выбранный заказ
+                // Найти полный объект заказа по его ID
+                var order = _context.Orders.Include(o => o.Client).Include(o => o.OrderedItems).FirstOrDefault(o => o.OrderID == selectedOrder.OrderID);
+                if (order != null)
+                {
+                    // Переход на страницу назначения курьера
+                    NavigationService.Navigate(new AssignCourierPage(order));
+                }
+            }
+            else
+            {
+                MessageBox.Show("Пожалуйста, выберите заказ.", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
             }
         }
+
 
         private void CancelOrder_Click(object sender, RoutedEventArgs e)
         {
@@ -205,6 +216,8 @@ namespace DeliverySystem.Views.Pages.AdminPage
             StatusComboBox.SelectedIndex = 0;
             SearchBox.Text = string.Empty;
         }
+
+
     }
 
     public class OrderViewModel

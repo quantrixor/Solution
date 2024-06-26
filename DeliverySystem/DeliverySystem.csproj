@@ -38,6 +38,9 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <PackageReference Include="Telegram.Bot">
+      <Version>19.0.0</Version>
+    </PackageReference>
     <Reference Include="BCrypt.Net-Next, Version=4.0.3.0, Culture=neutral, PublicKeyToken=1e11be04b6288443, processorArchitecture=MSIL">
       <HintPath>..\packages\BCrypt.Net-Next.4.0.3\lib\net472\BCrypt.Net-Next.dll</HintPath>
     </Reference>
@@ -269,6 +272,9 @@
     <Compile Include="Utilites\PasswordHelper.cs" />
     <Compile Include="Validators\EmailValidator.cs" />
     <Compile Include="ViewModel\DocumentViewModel.cs" />
+    <Compile Include="Views\Pages\AdminPage\AssignCourierPage.xaml.cs">
+      <DependentUpon>AssignCourierPage.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\Pages\AdminPage\ClientsPage.xaml.cs">
       <DependentUpon>ClientsPage.xaml</DependentUpon>
     </Compile>
@@ -328,6 +334,10 @@
       <SubType>Code</SubType>
     </Compile>
     <Page Include="UserControls\PasswordBoxWithToggle.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Pages\AdminPage\AssignCourierPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

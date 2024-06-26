@@ -133,6 +133,7 @@
     <Compile Include="Model\OperationLog.cs" />
     <Compile Include="Model\Order.cs" />
     <Compile Include="Model\OrderedItem.cs" />
+    <Compile Include="Model\PartialCourier.cs" />
     <Compile Include="Model\Product.cs" />
     <Compile Include="Model\ProductDocument.cs" />
     <Compile Include="Model\ProductType.cs" />

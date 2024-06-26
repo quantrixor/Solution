@@ -7,9 +7,11 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DeliverySystem", "DeliveryS
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ModelDeliverySystemData", "ModelDeliverySystemData\ModelDeliverySystemData.csproj", "{EBDC2827-A201-4B60-91C9-DBC0BC874A9B}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Server", "Server\Server.csproj", "{9D8534CF-405B-4EED-A176-4C2488E611F6}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Server", "Server\Server.csproj", "{9D8534CF-405B-4EED-A176-4C2488E611F6}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ClientWebApp", "ClientWebApp\ClientWebApp.csproj", "{BD84328A-47FE-492D-B689-BABAD9CBC585}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ClientWebApp", "ClientWebApp\ClientWebApp.csproj", "{BD84328A-47FE-492D-B689-BABAD9CBC585}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TelegramCourierBot", "TelegramCourierBot\TelegramCourierBot.csproj", "{E5E616A3-79BC-4FCE-AA0C-B965734D5FD5}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -33,6 +35,10 @@ Global
 		{BD84328A-47FE-492D-B689-BABAD9CBC585}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{BD84328A-47FE-492D-B689-BABAD9CBC585}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{BD84328A-47FE-492D-B689-BABAD9CBC585}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E5E616A3-79BC-4FCE-AA0C-B965734D5FD5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E5E616A3-79BC-4FCE-AA0C-B965734D5FD5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E5E616A3-79BC-4FCE-AA0C-B965734D5FD5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E5E616A3-79BC-4FCE-AA0C-B965734D5FD5}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

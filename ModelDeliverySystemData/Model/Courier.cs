@@ -26,6 +26,8 @@ namespace ModelDeliverySystemData.Model
         [StringLength(100)]
         public string LastName { get; set; }
 
+        public bool? IsAvailable { get; set; }
+        
         [Required]
         [StringLength(20)]
         public string PhoneNumber { get; set; }
@@ -33,6 +35,8 @@ namespace ModelDeliverySystemData.Model
         [Required]
         [StringLength(50)]
         public string LicenseNumber { get; set; }
+
+        public long? TelegramChatId { get; set; }
 
         public int? VehicleID { get; set; }
 
