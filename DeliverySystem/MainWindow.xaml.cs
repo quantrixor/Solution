@@ -59,5 +59,10 @@ namespace DeliverySystem
         {
             MainFrame.Navigate(new ClientsPage());
         }
+
+        private void SalesStatisticsPage_Click(object sender, RoutedEventArgs e)
+        {
+            MainFrame.Navigate(new SalesStatisticsPage());
+        }
     }
 }
