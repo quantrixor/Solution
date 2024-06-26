@@ -1,8 +1,11 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Media;
 using ModelDeliverySystemData.Model;
 using Telegram.Bot;
 
@@ -12,38 +15,53 @@ namespace DeliverySystem.Views.Pages.AdminPage
     {
         private dbContext _context;
         private Order _order;
+        private bool isEditing = false;
 
-        public AssignCourierPage(Order order)
+        public AssignCourierPage(int orderId)
         {
             InitializeComponent();
             _context = new dbContext();
-            _order = order;
+            _order = _context.Orders.Include("Client").FirstOrDefault(o => o.OrderID == orderId); // Загружаем объект из базы данных
+            LoadComboBoxData();
             LoadOrderData();
             LoadAvailableCouriers();
         }
 
+        private void LoadComboBoxData()
+        {
+            ClientComboBox.ItemsSource = _context.Clients.ToList();
+            ClientComboBox.DisplayMemberPath = "FullName";
+            ClientComboBox.SelectedValuePath = "ClientID";
+        }
+
         private void LoadOrderData()
         {
-            OrderIdTextBox.Text = _order.OrderID.ToString();
-            OrderDateTextBox.Text = _order.OrderDate.ToString();
-            DeliveryDateTextBox.Text = _order.DeliveryDate.ToString();
-            StatusTextBox.Text = _order.Status;
-            TotalAmountTextBox.Text = _order.TotalAmount.ToString();
-            PaymentMethodTextBox.Text = _order.PaymentMethod;
-            CommentTextBox.Text = _order.Comment;
-
-            var client = _context.Clients.Find(_order.ClientID);
-            if (client != null)
+            if (_order != null)
             {
-                ClientTextBox.Text = $"{client.FirstName} {client.LastName}";
-            }
+                OrderIdTextBox.Text = _order.OrderID.ToString();
+                OrderDateTextBox.Text = _order.OrderDate.ToString("yyyy-MM-dd");
+                DeliveryDatePicker.SelectedDate = _order.DeliveryDate;
 
-            var deliveryAddress = _context.DeliveryAddresses.FirstOrDefault(a => a.OrderID == _order.OrderID);
-            if (deliveryAddress != null)
-            {
-                DeliveryAddressTextBox.Text = $"{deliveryAddress.Address}, {deliveryAddress.City}, {deliveryAddress.Country}";
+                StatusComboBox.SelectedItem = StatusComboBox.Items.Cast<ComboBoxItem>().FirstOrDefault(item => item.Content.ToString() == _order.Status);
+                TotalAmountTextBox.Text = _order.TotalAmount.ToString("F2");
+
+                PaymentMethodComboBox.SelectedItem = PaymentMethodComboBox.Items.Cast<ComboBoxItem>().FirstOrDefault(item => item.Content.ToString() == _order.PaymentMethod);
+                CommentTextBox.Text = _order.Comment;
+
+                var client = _order.Client;
+                if (client != null)
+                {
+                    ClientComboBox.SelectedValue = client.ClientID;
+                }
+
+                var deliveryAddress = _context.DeliveryAddresses.FirstOrDefault(a => a.OrderID == _order.OrderID);
+                if (deliveryAddress != null)
+                {
+                    DeliveryAddressTextBox.Text = $"{deliveryAddress.Address}, {deliveryAddress.City}, {deliveryAddress.Country}";
+                }
             }
         }
+
 
         private void LoadAvailableCouriers()
         {
@@ -81,6 +99,7 @@ namespace DeliverySystem.Views.Pages.AdminPage
                 MessageBox.Show($"Ошибка при отправке уведомления: {ex.Message}", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
             }
         }
+
         private void AssignCourier_Click(object sender, RoutedEventArgs e)
         {
             try
@@ -120,6 +139,80 @@ namespace DeliverySystem.Views.Pages.AdminPage
         private void Cancel_Click(object sender, RoutedEventArgs e)
         {
             NavigationService.GoBack();
+        }
+
+        private void SaveChanges()
+        {
+            try
+            {
+                // Получение значений из текстовых полей и обновление модели
+                _order.OrderDate = DateTime.Parse(OrderDateTextBox.Text);
+                _order.DeliveryDate = DeliveryDatePicker.SelectedDate;
+                _order.Status = (StatusComboBox.SelectedItem as ComboBoxItem)?.Content.ToString();
+                _order.TotalAmount = decimal.Parse(TotalAmountTextBox.Text);
+                _order.PaymentMethod = (PaymentMethodComboBox.SelectedItem as ComboBoxItem)?.Content.ToString();
+                _order.Comment = CommentTextBox.Text;
+                _order.ClientID = (int)ClientComboBox.SelectedValue;
+
+                // Обновление адреса доставки
+                var deliveryAddress = _context.DeliveryAddresses.FirstOrDefault(a => a.OrderID == _order.OrderID);
+                if (deliveryAddress != null)
+                {
+                    deliveryAddress.Address = DeliveryAddressTextBox.Text;
+                    // Обновите также другие поля, если необходимо, например, City и Country
+                }
+
+                // Устанавливаем состояние сущности как измененное
+                _context.Entry(_order).State = System.Data.Entity.EntityState.Modified;
+
+                // Сохранение изменений в базе данных
+                _context.SaveChanges();
+
+                MessageBox.Show("Изменения успешно сохранены.", "Успех", MessageBoxButton.OK, MessageBoxImage.Information);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Произошла ошибка при сохранении изменений: {ex.Message}", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
+        }
+
+
+        private void EditButton_Click(object sender, RoutedEventArgs e)
+        {
+            if (isEditing)
+            {
+                // Сохранение изменений
+                SaveChanges();
+                EditButton.Content = "Редактировать";
+                SetReadOnlyFields(true);
+            }
+            else
+            {
+                // Включение режима редактирования
+                EditButton.Content = "Сохранить";
+                SetReadOnlyFields(false);
+            }
+
+            isEditing = !isEditing;
+        }
+
+        private void SetReadOnlyFields(bool isReadOnly)
+        {
+            DeliveryDatePicker.IsEnabled = !isReadOnly;
+            StatusComboBox.IsEnabled = !isReadOnly;
+            TotalAmountTextBox.IsReadOnly = isReadOnly;
+            PaymentMethodComboBox.IsEnabled = !isReadOnly;
+            CommentTextBox.IsReadOnly = isReadOnly;
+            ClientComboBox.IsEnabled = !isReadOnly;
+            DeliveryAddressTextBox.IsReadOnly = isReadOnly;
+
+            DeliveryDatePicker.Background = isReadOnly ? Brushes.WhiteSmoke : Brushes.White;
+            StatusComboBox.Background = isReadOnly ? Brushes.WhiteSmoke : Brushes.White;
+            TotalAmountTextBox.Background = isReadOnly ? Brushes.WhiteSmoke : Brushes.White;
+            PaymentMethodComboBox.Background = isReadOnly ? Brushes.WhiteSmoke : Brushes.White;
+            CommentTextBox.Background = isReadOnly ? Brushes.WhiteSmoke : Brushes.White;
+            ClientComboBox.Background = isReadOnly ? Brushes.WhiteSmoke : Brushes.White;
+            DeliveryAddressTextBox.Background = isReadOnly ? Brushes.WhiteSmoke : Brushes.White;
         }
     }
 }

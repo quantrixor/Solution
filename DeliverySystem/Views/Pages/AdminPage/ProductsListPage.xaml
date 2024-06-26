@@ -7,7 +7,7 @@
       xmlns:conv="clr-namespace:DeliverySystem"
       mc:Ignorable="d" Loaded="Page_Loaded"
       FontSize="16"
-      d:DesignHeight="650" d:DesignWidth="1010"
+      d:DesignHeight="650" d:DesignWidth="1110"
       Title="ProductsListPage">
     <Page.Resources>
         <conv:WidthConverter x:Key="WidthConverter" />

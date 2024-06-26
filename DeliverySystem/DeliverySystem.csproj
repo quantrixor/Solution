@@ -284,6 +284,9 @@
     <Compile Include="Views\Pages\AdminPage\CouriersPage.xaml.cs">
       <DependentUpon>CouriersPage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Views\Pages\AdminPage\CreateOrderPage.xaml.cs">
+      <DependentUpon>CreateOrderPage.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\Pages\AdminPage\ManageClientPage.xaml.cs">
       <DependentUpon>ManageClientPage.xaml</DependentUpon>
     </Compile>
@@ -350,6 +353,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\Pages\AdminPage\CouriersPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Pages\AdminPage\CreateOrderPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

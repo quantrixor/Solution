@@ -23,7 +23,6 @@ namespace DeliverySystem.Views.Pages.AdminPage
         {
             InitializeComponent();
             _context = new dbContext();
-            InitializeDatabaseContext();
             _orders = new ObservableCollection<OrderViewModel>();
             LoadOrders();
             InitializeSignalR();
@@ -75,17 +74,6 @@ namespace DeliverySystem.Views.Pages.AdminPage
                 .Show();
         }
 
-        private void InitializeDatabaseContext()
-        {
-            try
-            {
-                _context = new dbContext();
-            }
-            catch (Exception ex)
-            {
-                Console.WriteLine($"Failed to initialize database context: {ex.Message}");
-            }
-        }
 
         private void LoadOrders()
         {
@@ -115,7 +103,7 @@ namespace DeliverySystem.Views.Pages.AdminPage
         {
             if (_context == null)
             {
-                MessageBox.Show("Database context is not initialized.");
+                Console.WriteLine("Database context is not initialized.");
                 return;
             }
 
@@ -186,7 +174,7 @@ namespace DeliverySystem.Views.Pages.AdminPage
                 if (order != null)
                 {
                     // Переход на страницу назначения курьера
-                    NavigationService.Navigate(new AssignCourierPage(order));
+                    NavigationService.Navigate(new AssignCourierPage(order.OrderID));
                 }
             }
             else
@@ -217,7 +205,10 @@ namespace DeliverySystem.Views.Pages.AdminPage
             SearchBox.Text = string.Empty;
         }
 
-
+        private void CreateOrder_Click(object sender, RoutedEventArgs e)
+        {
+            NavigationService.Navigate(new CreateOrderPage());
+        }
     }
 
     public class OrderViewModel

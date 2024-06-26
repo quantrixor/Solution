@@ -29,7 +29,9 @@ public partial class Courier
 
     [Column(TypeName = "datetime")]
     public DateTime? CreatedAt { get; set; }
-    public bool IsAvailable { get; set; }
+    public bool? IsAvailable { get; set; }
+
+    public long? TelegramChatId { get; set; }
 
     [InverseProperty("Courier")]
     public virtual ICollection<CourierDocument> CourierDocuments { get; set; } = new List<CourierDocument>();

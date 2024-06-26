@@ -48,6 +48,7 @@
             <StackPanel Grid.Row="2" HorizontalAlignment="Center" VerticalAlignment="Center" Orientation="Horizontal" Margin="10">
                 <Button Content="Назначить курьера" Width="150" Margin="5" Click="AssignCourier_Click" Style="{StaticResource AnimatedButtonStyle}"/>
                 <Button Content="Отменить заказ" Width="150" Margin="5" Click="CancelOrder_Click" Style="{StaticResource AnimatedButtonStyle}"/>
+                <Button Content="Создать заказ" Width="150" Margin="5" Click="CreateOrder_Click" Style="{StaticResource AnimatedButtonStyle}"/>
             </StackPanel>
         </Grid>
     </Border>

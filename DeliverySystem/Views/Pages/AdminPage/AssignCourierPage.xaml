@@ -26,11 +26,14 @@
                 <StackPanel Orientation="Horizontal" Margin="0,10">
                     <StackPanel>
                         <Label Content="Дата доставки:"/>
-                        <TextBox x:Name="DeliveryDateTextBox" Style="{StaticResource CustomTextBoxStyle}" Width="250" IsReadOnly="True" Background="WhiteSmoke"/>
+                        <DatePicker x:Name="DeliveryDatePicker" Width="250" IsEnabled="False"/>
                     </StackPanel>
                     <StackPanel Margin="10,0,0,0">
                         <Label Content="Статус:"/>
-                        <TextBox x:Name="StatusTextBox" Style="{StaticResource CustomTextBoxStyle}" Width="250" IsReadOnly="True" Background="WhiteSmoke"/>
+                        <ComboBox x:Name="StatusComboBox" Width="250" IsEnabled="False">
+                            <ComboBoxItem Content="Доставляется"/>
+                            <ComboBoxItem Content="Завершен"/>
+                        </ComboBox>
                     </StackPanel>
                 </StackPanel>
 
@@ -41,7 +44,10 @@
                     </StackPanel>
                     <StackPanel Margin="10,0,0,0">
                         <Label Content="Способ оплаты:"/>
-                        <TextBox x:Name="PaymentMethodTextBox" Style="{StaticResource CustomTextBoxStyle}" Width="250" IsReadOnly="True" Background="WhiteSmoke"/>
+                        <ComboBox x:Name="PaymentMethodComboBox" Width="250" IsEnabled="False">
+                            <ComboBoxItem Content="Кредитной картой"/>
+                            <ComboBoxItem Content="Наличкой"/>
+                        </ComboBox>
                     </StackPanel>
                 </StackPanel>
 
@@ -52,7 +58,7 @@
                     </StackPanel>
                     <StackPanel Margin="10,0,0,0">
                         <Label Content="Клиент:"/>
-                        <TextBox x:Name="ClientTextBox" Style="{StaticResource CustomTextBoxStyle}" Width="250" IsReadOnly="True" Background="WhiteSmoke"/>
+                        <ComboBox x:Name="ClientComboBox" DisplayMemberPath="FullName" SelectedValuePath="ClientID" Width="250" IsEnabled="False"/>
                     </StackPanel>
                 </StackPanel>
 
@@ -63,9 +69,13 @@
                     </StackPanel>
                 </StackPanel>
 
+                <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="10">
+                    <Button x:Name="EditButton" Content="Редактировать" Style="{StaticResource AnimatedButtonStyle}" Width="200" Click="EditButton_Click"/>
+                </StackPanel>
+
                 <StackPanel HorizontalAlignment="Center" Margin="10">
                     <Label Content="Выберите курьера:"/>
-                    <ComboBox x:Name="CourierComboBox" Width="300" DisplayMemberPath="FullName" SelectedValuePath="CourierId"/>
+                    <ComboBox x:Name="CourierComboBox" Width="300" DisplayMemberPath="FullName" SelectedValuePath="CourierID"/>
                 </StackPanel>
 
                 <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
