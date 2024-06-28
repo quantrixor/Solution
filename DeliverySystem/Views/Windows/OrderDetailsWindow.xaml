@@ -4,8 +4,9 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:DeliverySystem.Views.Windows"
-        mc:Ignorable="d"
-        Title="Подробности заказа" Height="500" Width="800">
+        mc:Ignorable="d" WindowStartupLocation="CenterScreen"
+        ResizeMode="CanMinimize"
+        Title="Подробности заказа" Height="600" Width="800">
     <Grid>
         <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center" Width="700">
             <TextBlock Text="Подробности заказа" FontWeight="Bold" FontSize="20" Margin="10"/>
