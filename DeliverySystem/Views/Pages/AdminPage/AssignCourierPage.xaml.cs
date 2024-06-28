@@ -27,6 +27,7 @@ namespace DeliverySystem.Views.Pages.AdminPage
             LoadAvailableCouriers();
         }
 
+
         private void LoadComboBoxData()
         {
             ClientComboBox.ItemsSource = _context.Clients.ToList();
@@ -145,27 +146,21 @@ namespace DeliverySystem.Views.Pages.AdminPage
         {
             try
             {
-                // Получение значений из текстовых полей и обновление модели
                 _order.OrderDate = DateTime.Parse(OrderDateTextBox.Text);
-                _order.DeliveryDate = DeliveryDatePicker.SelectedDate;
-                _order.Status = (StatusComboBox.SelectedItem as ComboBoxItem)?.Content.ToString();
+                _order.DeliveryDate = DeliveryDatePicker.SelectedDate ?? _order.DeliveryDate; // Устанавливаем текущую дату доставки, если новая не выбрана
+                _order.Status = (StatusComboBox.SelectedItem as ComboBoxItem)?.Content.ToString() ?? _order.Status; // Сохраняем текущий статус, если новый не выбран
                 _order.TotalAmount = decimal.Parse(TotalAmountTextBox.Text);
-                _order.PaymentMethod = (PaymentMethodComboBox.SelectedItem as ComboBoxItem)?.Content.ToString();
+                _order.PaymentMethod = (PaymentMethodComboBox.SelectedItem as ComboBoxItem)?.Content.ToString() ?? _order.PaymentMethod;
                 _order.Comment = CommentTextBox.Text;
                 _order.ClientID = (int)ClientComboBox.SelectedValue;
 
-                // Обновление адреса доставки
                 var deliveryAddress = _context.DeliveryAddresses.FirstOrDefault(a => a.OrderID == _order.OrderID);
                 if (deliveryAddress != null)
                 {
                     deliveryAddress.Address = DeliveryAddressTextBox.Text;
-                    // Обновите также другие поля, если необходимо, например, City и Country
                 }
 
-                // Устанавливаем состояние сущности как измененное
                 _context.Entry(_order).State = System.Data.Entity.EntityState.Modified;
-
-                // Сохранение изменений в базе данных
                 _context.SaveChanges();
 
                 MessageBox.Show("Изменения успешно сохранены.", "Успех", MessageBoxButton.OK, MessageBoxImage.Information);

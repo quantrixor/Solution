@@ -222,5 +222,7 @@ namespace DeliverySystem.Views.Pages.AdminPage
         public string PaymentMethod { get; set; }
         public DateTime? PaymentDate { get; set; }
         public string Comment { get; set; }
+        public string ClientFullName { get; set; }
+        public string CourierFullName { get; set; }
     }
 }

@@ -1,0 +1,72 @@
+﻿<Page x:Class="DeliverySystem.Views.Pages.AdminPage.OrderListPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+      xmlns:local="clr-namespace:DeliverySystem.Views.Pages.AdminPage"
+      xmlns:conv="clr-namespace:DeliverySystem"
+      mc:Ignorable="d"
+      FontSize="16"
+      Title="OrderListPage">
+    <Page.Resources>
+        <conv:WidthConverter x:Key="WidthConverter" />
+    </Page.Resources>
+
+    <Border CornerRadius="10" Background="WhiteSmoke" Margin="10">
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
+
+            <Grid Grid.Row="0" Margin="10">
+                <StackPanel HorizontalAlignment="Left" VerticalAlignment="Center" Orientation="Horizontal">
+                    <Label Content="Поиск:"/>
+                    <TextBox x:Name="SearchBox" Style="{StaticResource CustomTextBoxStyle}" Width="300" TextChanged="SearchBox_TextChanged"/>
+                    <Label Content="Дата с:" Margin="10,0,0,0"/>
+                    <DatePicker x:Name="StartDatePicker" SelectedDateChanged="DatePicker_SelectedDateChanged" Width="150"/>
+                    <Label Content="по:" Margin="10,0,0,0"/>
+                    <DatePicker x:Name="EndDatePicker" SelectedDateChanged="DatePicker_SelectedDateChanged" Width="150"/>
+                    <Button Content="Сбросить фильтр" Style="{StaticResource AnimatedButtonStyle}" Margin="10,0,0,0" Width="200" Click="ClearFilter_Click"/>
+                </StackPanel>
+            </Grid>
+
+            <Grid Grid.Row="1" Margin="10">
+                <ListView x:Name="OrdersListView" ItemsSource="{Binding Orders}">
+                    <ListView.Resources>
+                        <Style TargetType="TextBlock">
+                            <Setter Property="FontSize" Value="16"/>
+                            <Setter Property="FontWeight" Value="Bold"/>
+                            <Setter Property="VerticalAlignment" Value="Center"/>
+                        </Style>
+                    </ListView.Resources>
+                    <ListView.View>
+                        <GridView>
+                            <GridViewColumn Header="ID заказа" DisplayMemberBinding="{Binding OrderID}" 
+                                     Width="{Binding ActualWidth, RelativeSource={RelativeSource AncestorType=ListView}, Converter={StaticResource WidthConverter}, ConverterParameter=8}"/>
+                            <GridViewColumn Header="Дата заказа" DisplayMemberBinding="{Binding OrderDate}" 
+                                     Width="{Binding ActualWidth, RelativeSource={RelativeSource AncestorType=ListView}, Converter={StaticResource WidthConverter}, ConverterParameter=8}"/>
+                            <GridViewColumn Header="Дата доставки" DisplayMemberBinding="{Binding DeliveryDate}" 
+                                     Width="{Binding ActualWidth, RelativeSource={RelativeSource AncestorType=ListView}, Converter={StaticResource WidthConverter}, ConverterParameter=8}"/>
+                            <GridViewColumn Header="Статус" DisplayMemberBinding="{Binding Status}" 
+                                     Width="{Binding ActualWidth, RelativeSource={RelativeSource AncestorType=ListView}, Converter={StaticResource WidthConverter}, ConverterParameter=8}"/>
+                            <GridViewColumn Header="Сумма" DisplayMemberBinding="{Binding TotalAmount}" 
+                                     Width="{Binding ActualWidth, RelativeSource={RelativeSource AncestorType=ListView}, Converter={StaticResource WidthConverter}, ConverterParameter=8}"/>
+                            <GridViewColumn Header="Клиент" DisplayMemberBinding="{Binding ClientFullName}" 
+                                     Width="{Binding ActualWidth, RelativeSource={RelativeSource AncestorType=ListView}, Converter={StaticResource WidthConverter}, ConverterParameter=8}"/>
+                            <GridViewColumn Header="Курьер" DisplayMemberBinding="{Binding CourierFullName}" 
+                                     Width="{Binding ActualWidth, RelativeSource={RelativeSource AncestorType=ListView}, Converter={StaticResource WidthConverter}, ConverterParameter=8}"/>
+                        </GridView>
+                    </ListView.View>
+                </ListView>
+            </Grid>
+
+            <Grid Grid.Row="2">
+                <StackPanel HorizontalAlignment="Center" Orientation="Horizontal" VerticalAlignment="Center" Margin="0,10,0,10">
+                    <Button Style="{StaticResource AnimatedButtonStyle}" Width="300" Content="Показать подробности" Click="ShowOrderDetailsButton_Click"/>
+                </StackPanel>
+            </Grid>
+        </Grid>
+    </Border>
+</Page>

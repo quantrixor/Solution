@@ -20,8 +20,24 @@
                         <ComboBoxItem Content="3 квартал" Tag="3"/>
                         <ComboBoxItem Content="4 квартал" Tag="4"/>
                     </ComboBox>
-                    <Button Content="Показать график" Click="ShowChartButton_Click" Width="150"/>
+                    <Button Content="Показать график" Click="ShowChartButton_Click" Width="150" Style="{StaticResource AnimatedButtonStyle}"/>
                 </StackPanel>
+
+                <StackPanel Margin="20">
+                    <TextBlock Text="Общее количество продаж: " FontWeight="Bold"/>
+                    <TextBlock x:Name="TotalSalesTextBlock"/>
+                </StackPanel>
+
+                <StackPanel Margin="20">
+                    <TextBlock Text="Средняя сумма заказа: " FontWeight="Bold"/>
+                    <TextBlock x:Name="AverageOrderValueTextBlock"/>
+                </StackPanel>
+
+                <StackPanel Margin="20">
+                    <TextBlock Text="Количество заказов: " FontWeight="Bold"/>
+                    <TextBlock x:Name="TotalOrdersTextBlock"/>
+                </StackPanel>
+
                 <Border BorderBrush="Black" Height="400" BorderThickness="1" Margin="20" Background="White">
                     <Grid>
                         <lvc:CartesianChart x:Name="SalesChart" LegendLocation="Right">

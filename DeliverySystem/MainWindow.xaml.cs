@@ -64,5 +64,10 @@ namespace DeliverySystem
         {
             MainFrame.Navigate(new SalesStatisticsPage());
         }
+
+        private void DeliveryList_Click(object sender, RoutedEventArgs e)
+        {
+            MainFrame.Navigate(new OrderListPage());
+        }
     }
 }

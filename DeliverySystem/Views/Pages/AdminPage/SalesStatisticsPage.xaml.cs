@@ -52,6 +52,7 @@ namespace DeliverySystem.Views.Pages.AdminPage
 
                 var salesData = GetSalesData(startDate, endDate);
                 DisplayChart(salesData);
+                DisplayStatistics(salesData);
             }
         }
 
@@ -86,15 +87,15 @@ namespace DeliverySystem.Views.Pages.AdminPage
             }
 
             SalesValues = new SeriesCollection
-    {
-        new LineSeries
-        {
-            Title = "Продажи",
-            Values = new ChartValues<decimal>(salesData.Values),
-            PointGeometry = DefaultGeometries.Circle,
-            PointGeometrySize = 15
-        }
-    };
+            {
+                new LineSeries
+                {
+                    Title = "Продажи",
+                    Values = new ChartValues<decimal>(salesData.Values),
+                    PointGeometry = DefaultGeometries.Circle,
+                    PointGeometrySize = 15
+                }
+            };
 
             Labels = salesData.Keys.Select(m => new DateTime(DateTime.Now.Year, m, 1).ToString("MMMM")).ToList();
             Formatter = value => value.ToString("C");
@@ -118,6 +119,17 @@ namespace DeliverySystem.Views.Pages.AdminPage
             });
 
             DataContext = this;
+        }
+
+        private void DisplayStatistics(Dictionary<int, decimal> salesData)
+        {
+            var totalSales = salesData.Values.Sum();
+            var averageOrderValue = salesData.Values.Average();
+            var totalOrders = salesData.Count;
+
+            TotalSalesTextBlock.Text = totalSales.ToString("C");
+            AverageOrderValueTextBlock.Text = averageOrderValue.ToString("C");
+            TotalOrdersTextBlock.Text = totalOrders.ToString();
         }
     }
 }

@@ -26,7 +26,7 @@
                     <Button Click="Oreders_Click" Content="Заказы" Width="200" Margin="0,5,0,0" Style="{StaticResource AnimatedButtonStyle}"/>
                     <Button Click="CouriersList_Click" Content="Курьеры" Width="200" Margin="0,5,0,0" Style="{StaticResource AnimatedButtonStyle}"/>
                     <Button Click="ClientsList_Click" Content="Клиенты" Width="200" Margin="0,5,0,0" Style="{StaticResource AnimatedButtonStyle}"/>
-                    <Button Content="Доставки" Width="200" Margin="0,5,0,0" Style="{StaticResource AnimatedButtonStyle}"/>
+                    <Button Click="DeliveryList_Click" Content="Доставки" Width="200" Margin="0,5,0,0" Style="{StaticResource AnimatedButtonStyle}"/>
                     <Button Click="SalesStatisticsPage_Click" Content="Статистика" Width="200" Margin="0,5,0,0" Style="{StaticResource AnimatedButtonStyle}"/>
                     <Button Content="Выйти" x:Name="SignOut" Click="SignOut_Click" Width="200" Margin="0,5,0,0" Style="{StaticResource AnimatedButtonStyle}"/>
                 </StackPanel>

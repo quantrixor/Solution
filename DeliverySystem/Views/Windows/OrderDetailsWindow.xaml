@@ -1,0 +1,30 @@
+﻿<Window x:Class="DeliverySystem.Views.Windows.OrderDetailsWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:DeliverySystem.Views.Windows"
+        mc:Ignorable="d"
+        Title="Подробности заказа" Height="500" Width="800">
+    <Grid>
+        <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center" Width="700">
+            <TextBlock Text="Подробности заказа" FontWeight="Bold" FontSize="20" Margin="10"/>
+            <TextBlock Text="ID заказа:" FontWeight="Bold"/>
+            <TextBlock x:Name="OrderIDTextBlock" Margin="0,0,0,10"/>
+            <TextBlock Text="Дата заказа:" FontWeight="Bold"/>
+            <TextBlock x:Name="OrderDateTextBlock" Margin="0,0,0,10"/>
+            <TextBlock Text="Дата доставки:" FontWeight="Bold"/>
+            <TextBlock x:Name="DeliveryDateTextBlock" Margin="0,0,0,10"/>
+            <TextBlock Text="Статус:" FontWeight="Bold"/>
+            <TextBlock x:Name="StatusTextBlock" Margin="0,0,0,10"/>
+            <TextBlock Text="Сумма:" FontWeight="Bold"/>
+            <TextBlock x:Name="TotalAmountTextBlock" Margin="0,0,0,10"/>
+            <TextBlock Text="Клиент:" FontWeight="Bold"/>
+            <TextBlock x:Name="ClientTextBlock" Margin="0,0,0,10"/>
+            <TextBlock Text="Курьер:" FontWeight="Bold"/>
+            <TextBlock x:Name="CourierTextBlock" Margin="0,0,0,10"/>
+            <TextBlock Text="Товары:" FontWeight="Bold"/>
+            <ListBox x:Name="OrderedItemsListBox" Margin="0,0,0,10"/>
+        </StackPanel>
+    </Grid>
+</Window>

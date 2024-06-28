@@ -56,7 +56,6 @@ namespace TelegramCourierBot
         private static Dictionary<long, bool> awaitingPhoneInput = new Dictionary<long, bool>();
         private static Dictionary<long, string> pendingPhoneNumber = new Dictionary<long, string>();
         private static Dictionary<long, bool> awaitingLicenseInput = new Dictionary<long, bool>();
-
         private static async Task HandleUpdateAsync(ITelegramBotClient botClient, Update update, CancellationToken cancellationToken)
         {
             if (update.Type == UpdateType.Message)
@@ -88,8 +87,15 @@ namespace TelegramCourierBot
                             await botClient.SendTextMessageAsync(chatId: message.Chat.Id, text: "Добро пожаловать в Бот Курьера! Напишите /register, чтобы зарегистрироваться.");
                             break;
                         case "/register":
-                            awaitingPhoneInput[message.Chat.Id] = true;
-                            await botClient.SendTextMessageAsync(chatId: message.Chat.Id, text: "Пожалуйста, отправьте ваш номер телефона.");
+                            if (IsCourierRegistered(message.Chat.Id))
+                            {
+                                await botClient.SendTextMessageAsync(chatId: message.Chat.Id, text: "Вы уже зарегистрированы как курьер.");
+                            }
+                            else
+                            {
+                                awaitingPhoneInput[message.Chat.Id] = true;
+                                await botClient.SendTextMessageAsync(chatId: message.Chat.Id, text: "Пожалуйста, отправьте ваш номер телефона.");
+                            }
                             break;
                         case "/orders":
                             await SendOrders(message.Chat.Id, false);
@@ -106,7 +112,22 @@ namespace TelegramCourierBot
                     }
                 }
             }
+            else if (update.Type == UpdateType.CallbackQuery)
+            {
+                var callbackQuery = update.CallbackQuery;
+                if (callbackQuery.Data.StartsWith("confirm_"))
+                {
+                    int orderId = int.Parse(callbackQuery.Data.Split('_')[1]);
+                    await ConfirmOrder(callbackQuery.Message.Chat.Id, orderId);
+                }
+            }
         }
+
+        private static bool IsCourierRegistered(long chatId)
+        {
+            return _context.Couriers.Any(c => c.TelegramChatId == chatId);
+        }
+
         private static Task HandleErrorAsync(ITelegramBotClient botClient, Exception exception, CancellationToken cancellationToken)
         {
             Console.WriteLine($"Ошибка: {exception.Message}");
@@ -200,7 +221,6 @@ namespace TelegramCourierBot
             }
         }
 
-
         private static async Task SendProfile(long chatId)
         {
             var courier = _context.Couriers.FirstOrDefault(c => c.TelegramChatId == chatId);
@@ -241,6 +261,7 @@ namespace TelegramCourierBot
             {
                 // Изменяем статус доставки на 'Завершен'
                 delivery.StatusID = 2; // Предполагаем, что статус 2 означает 'Завершен'
+                delivery.ActualDeliveryDate = DateTime.Now;
                 _context.SaveChanges();
 
                 // Проверяем, есть ли еще незавершенные заказы у этого курьера
@@ -275,5 +296,6 @@ namespace TelegramCourierBot
                 );
             }
         }
+
     }
 }

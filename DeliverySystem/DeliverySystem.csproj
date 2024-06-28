@@ -296,6 +296,9 @@
     <Compile Include="Views\Pages\AdminPage\ManageProductPage.xaml.cs">
       <DependentUpon>ManageProductPage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Views\Pages\AdminPage\OrderListPage.xaml.cs">
+      <DependentUpon>OrderListPage.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\Pages\AdminPage\OrdersPage.xaml.cs">
       <DependentUpon>OrdersPage.xaml</DependentUpon>
     </Compile>
@@ -316,6 +319,9 @@
     </Compile>
     <Compile Include="Views\Windows\AdminWindows\CourierDocumentsWindow.xaml.cs">
       <DependentUpon>CourierDocumentsWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Windows\OrderDetailsWindow.xaml.cs">
+      <DependentUpon>OrderDetailsWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="WidthConverter.cs" />
     <Compile Include="Views\Pages\UserPages\UserProfilePage.xaml.cs">
@@ -374,6 +380,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Views\Pages\AdminPage\OrderListPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Views\Pages\AdminPage\OrdersPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -403,6 +413,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\Windows\AdminWindows\CourierDocumentsWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Windows\OrderDetailsWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
